@@ -10,10 +10,12 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.0]
       ## Basic attributes
       t.string :first_name
       t.string :last_name
-      t.string :street_address_one
-      t.string :street_address_two
+      t.string :first_street_address
+      t.string :second_street_address
+      t.string :city
       t.string :state
       t.integer :zipcode
+      t.integer :role
 
       ## Recoverable
       t.string   :reset_password_token
