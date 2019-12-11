@@ -1,24 +1,7 @@
-# README
+# Pet Portal
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Pet Portal is a veterinary pet patient portal created using Ruby on Rails.  Veterinary clerks can create and manage the pets that come to their office.  Pet owners can create an account and see all the info regarding their pets from their veterinary office.
 
-Things you may want to cover:
+# Notice
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+This is the bare bones beginning!
