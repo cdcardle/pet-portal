@@ -10,7 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_11_174711) do
+ActiveRecord::Schema.define(version: 2019_12_12_150057) do
+
+  create_table "pets", force: :cascade do |t|
+    t.string "name"
+    t.string "animal_type"
+    t.string "breed"
+    t.string "gender"
+    t.string "color"
+    t.integer "weight"
+    t.integer "age"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
