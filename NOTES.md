@@ -3,14 +3,14 @@ Models
   Attributes
     User
       email, password, first name, last name, street address one, street address two, state, zipcode, role
-    Pets
-      name, animal-type, breed, weight, age, color
-    Appointments
+    Pet
+      name, animal_type, breed, weight, age, color, gender
+    Appointment
       date, time
     Doctor
       first name, last name
-    Bill
-      total, date
+    Invoice
+      total, date (from appointment)
 
   Associations
     User
@@ -18,19 +18,19 @@ Models
       Owners
         has_many pets
         has_many appointments, :through => pets
-        has_many bills, :through => pets
+        has_many invoices, :through => pets
     Pets
       belongs to owner, class: :user
       has_many appointments
       has_many doctors, through: appointments
-      has_many bills
+      has_many invoices
     Appointments
       belongs_to pet
       belongs_to doctor
-      has_one bill
+      has_one invoice
     Doctor
       has_many appointments
       has_many patients, class: pets, through: :appointments
-    Bill
+    Invoices
       belongs_to appointment
       belongs_to owner
