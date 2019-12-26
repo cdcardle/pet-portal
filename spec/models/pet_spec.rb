@@ -1,12 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe Pet, type: :model do
-  let(:spot) {
+  let(:casey) {
     Pet.new(
-      name: "Spot",
+      name: "Casey",
       animal_type: "Dog",
       breed: "German Shepherd Dog",
-      gender: "Male",
+      gender: "female",
       color: "Black and Tan",
       weight: 50,
       age: 7
@@ -14,30 +14,30 @@ RSpec.describe Pet, type: :model do
   }
 
   it 'has a name' do
-    expect(spot.name).to eq("Spot")
+    expect(casey.name).to eq("Casey")
   end
 
   it 'has an animal_type' do
-    expect(spot.animal_type).to eq("Dog")
+    expect(casey.animal_type).to eq("Dog")
   end
 
   it 'has a breed' do
-    expect(spot.breed).to eq("German Shepherd Dog")
+    expect(casey.breed).to eq("German Shepherd Dog")
   end
 
   it 'has a gender' do
-    expect(spot.gender).to eq("Male")
+    expect(casey.gender).to eq("female")
   end
 
   it 'has a color' do
-    expect(spot.color).to eq("Black and Tan")
+    expect(casey.color).to eq("Black and Tan")
   end
 
   it 'has a weight' do
-    expect(spot.weight).to eq(50)
+    expect(casey.weight).to eq(50)
   end
 
   it 'has an age' do
-    expect(spot.age).to eq(7)
+    expect(casey.age).to eq(7)
   end
 end 

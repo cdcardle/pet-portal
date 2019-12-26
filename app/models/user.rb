@@ -1,5 +1,7 @@
 class User < ApplicationRecord
   enum role: [:guest, :owner, :admin]
+
+  has_many :pets
   
   devise :database_authenticatable, :registerable, :validatable
 

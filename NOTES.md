@@ -4,7 +4,7 @@ Models
     User
       email, password, first name, last name, street address one, street address two, state, zipcode, role
     Pet
-      name, animal_type, breed, weight, age, color, gender
+      name, animal_type, breed, weight(pounds), age(months), color, gender
     Appointment
       date, time
     Doctor

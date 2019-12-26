@@ -43,49 +43,90 @@ RSpec.describe User, type: :model do
       role: 2)
   }
 
-  it 'has an email' do
-    expect(tom.email).to eq("tom_example@yahoo.com")
-  end
-  
-  it 'has a first name' do
-    expect(tom.first_name).to eq("Tom")
+  let(:spot) {
+    Pet.new(
+      name: "Spot",
+      animal_type: "dog",
+      breed: "Beagle",
+      weight: 35,
+      age: 8,
+      color: "brown and white",
+      gender: "male"
+    )
+  }
+
+  let(:sassy) {
+    Pet.new(
+      name: "Sassy",
+      animal_type: "cat",
+      breed: "Calico",
+      weight: 13,
+      age: 36,
+      color: "orange and brown",
+      gender: "female"
+    )
+  }
+
+  context "Model" do
+    it 'has an email' do
+      expect(tom.email).to eq("tom_example@yahoo.com")
+    end
+    
+    it 'has a first name' do
+      expect(tom.first_name).to eq("Tom")
+    end
+
+    it 'has a last name' do
+      expect(tom.last_name).to eq("Smith")
+    end
+
+    it 'has a first street address' do
+      expect(tom.first_street_address).to eq("1234 Example Rd.")
+    end
+
+    it "has a city" do
+      expect(tom.city).to eq("Exampletown")
+    end
+
+    it 'has a state' do
+      expect(tom.state).to eq("Nebraska")
+    end
+
+    it 'has a zipcode' do
+      expect(tom.zipcode).to eq(12345)
+    end
+
+    it "has a role" do
+      expect(tom.role).to eq("guest")
+      expect(bob.role).to eq("owner")
+      expect(joe.role).to eq("admin")
+    end
+
+    it "responds to name" do
+      expect(tom.name).to eq("Tom Smith")
+    end
+
+    it "responds to address with a second street address" do
+      expect(tom.address).to eq("1234 Example Rd., Apt 201, Exampletown, Nebraska 12345")
+    end
+
+    it "responds to address without a second street address" do
+      expect(joe.address).to eq("7890 Example Dr., Exampletown, Nebraska 12345")
+    end
   end
 
-  it 'has a last name' do
-    expect(tom.last_name).to eq("Smith")
-  end
-
-  it 'has a first street address' do
-    expect(tom.first_street_address).to eq("1234 Example Rd.")
-  end
-
-  it "has a city" do
-    expect(tom.city).to eq("Exampletown")
-  end
-
-  it 'has a state' do
-    expect(tom.state).to eq("Nebraska")
-  end
-
-  it 'has a zipcode' do
-    expect(tom.zipcode).to eq(12345)
-  end
-
-  it "has a role" do
-    expect(tom.role).to eq("guest")
-    expect(bob.role).to eq("owner")
-    expect(joe.role).to eq("admin")
-  end
-
-  it "responds to name" do
-    expect(tom.name).to eq("Tom Smith")
-  end
-
-  it "responds to address with a second street address" do
-    expect(tom.address).to eq("1234 Example Rd., Apt 201, Exampletown, Nebraska 12345")
-  end
-
-  it "responds to address without a second street address" do
-    expect(joe.address).to eq("7890 Example Dr., Exampletown, Nebraska 12345")
+  context "Associations" do
+    before do
+      spot.owner = bob
+      spot.save
+      sassy.owner = bob
+      sassy.save
+    end
+    
+    it "has many pets" do
+      expect(bob.pets.size).to eq(2)
+      expect(bob.pets).to include(sassy)
+      expect(bob.pets).to include(spot)
+    end
   end
 end
