@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  enum role: [:guest, :owner, :admin]
+  enum role: [:owner, :admin]
 
   has_many :pets
   

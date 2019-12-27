@@ -2,45 +2,11 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   let(:tom) {
-      User.new(
-      email: "tom_example@yahoo.com",
-      password: "examplepassword",
-      first_name: "Tom",
-      last_name: "Smith",
-      first_street_address: "1234 Example Rd.",
-      second_street_address: "Apt 201",
-      city: "Exampletown",
-      state: "Nebraska",
-      zipcode: 12345,
-      role: 0
-    )
+    build(:tom)
   }
 
-  let(:bob) {
-    User.new(
-      email: "bob_example@yahoo.com",
-      password: "examplepass123",
-      first_name: "Bob",
-      last_name: "Johnson",
-      first_street_address: "1234 Example Dr.",
-      second_street_address: "Apt 101",
-      city: "Exampletown",
-      state: "Nebraska",
-      zipcode: 12345,
-      role: 1)
-  }
-
-  let(:joe) {
-    User.new(
-      email: "joe_example@yahoo.com",
-      password: "password456",
-      first_name: "Joe",
-      last_name: "Brown",
-      first_street_address: "7890 Example Dr.",
-      city: "Exampletown",
-      state: "Nebraska",
-      zipcode: 12345,
-      role: 2)
+  let(:admin) {
+    build(:admin)
   }
 
   let(:spot) {
@@ -77,7 +43,7 @@ RSpec.describe User, type: :model do
     end
 
     it 'has a last name' do
-      expect(tom.last_name).to eq("Smith")
+      expect(tom.last_name).to eq("Johnson")
     end
 
     it 'has a first street address' do
@@ -89,7 +55,7 @@ RSpec.describe User, type: :model do
     end
 
     it 'has a state' do
-      expect(tom.state).to eq("Nebraska")
+      expect(tom.state).to eq("Example")
     end
 
     it 'has a zipcode' do
@@ -97,36 +63,35 @@ RSpec.describe User, type: :model do
     end
 
     it "has a role" do
-      expect(tom.role).to eq("guest")
-      expect(bob.role).to eq("owner")
-      expect(joe.role).to eq("admin")
+      expect(tom.role).to eq("owner")
+      expect(admin.role).to eq("admin")
     end
 
     it "responds to name" do
-      expect(tom.name).to eq("Tom Smith")
+      expect(tom.name).to eq("Tom Johnson")
     end
 
     it "responds to address with a second street address" do
-      expect(tom.address).to eq("1234 Example Rd., Apt 201, Exampletown, Nebraska 12345")
+      expect(tom.address).to eq("1234 Example Rd., Apt 201, Exampletown, Example 12345")
     end
 
     it "responds to address without a second street address" do
-      expect(joe.address).to eq("7890 Example Dr., Exampletown, Nebraska 12345")
+      expect(admin.address).to eq("1234 Example Dr., Exampletown, Example 12345")
     end
   end
 
   context "Associations" do
     before do
-      spot.owner = bob
+      spot.owner = tom
       spot.save
-      sassy.owner = bob
+      sassy.owner = tom
       sassy.save
     end
     
     it "has many pets" do
-      expect(bob.pets.size).to eq(2)
-      expect(bob.pets).to include(sassy)
-      expect(bob.pets).to include(spot)
+      expect(tom.pets.size).to eq(2)
+      expect(tom.pets).to include(sassy)
+      expect(tom.pets).to include(spot)
     end
   end
 end
