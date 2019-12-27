@@ -1,17 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe Pet, type: :model do
-  let(:casey) {
-    build(:casey)
-  }
-
-  let(:spot) {
-    build(:spot)
-  }
-
-  let(:tom) {
-    build(:tom)
-  }
+  let(:casey) { build(:casey) }
+  let(:spot) { build(:spot) }
+  let(:tom) { build(:tom) }
+  let(:appt_one) { build(:appt_one) }
+  let(:appt_two) { build(:appt_two) }
 
   context "Model" do
 
@@ -50,11 +44,21 @@ RSpec.describe Pet, type: :model do
       casey.owner = tom
       spot.save
       casey.save
+
+      appt_one.pet = casey
+      appt_two.pet = casey
+      appt_one.save
+      appt_two.save
     end
 
-    it "can have an owner" do
+    it "has an owner" do
       expect(casey.owner).to eq(tom)
       expect(spot.owner).to eq(tom)
+    end
+    
+    it "has many appointments" do
+      expect(casey.appointments).to include(appt_one)
+      expect(casey.appointments).to include(appt_two)
     end
   end
 end
