@@ -10,27 +10,11 @@ RSpec.describe User, type: :model do
   }
 
   let(:spot) {
-    Pet.new(
-      name: "Spot",
-      animal_type: "dog",
-      breed: "Beagle",
-      weight: 35,
-      age: 8,
-      color: "brown and white",
-      gender: "male"
-    )
+    build(:spot)
   }
 
   let(:sassy) {
-    Pet.new(
-      name: "Sassy",
-      animal_type: "cat",
-      breed: "Calico",
-      weight: 13,
-      age: 36,
-      color: "orange and brown",
-      gender: "female"
-    )
+    build(:sassy)
   }
 
   context "Model" do
