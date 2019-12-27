@@ -9,6 +9,16 @@ FactoryBot.define do
     gender { "male" }
   end
 
+  factory :casey, class: "Pet" do
+    name { "Casey" }
+    animal_type { "Dog" }
+    breed { "German Shepherd Dog" }
+    gender { "female" }
+    color { "Black and Tan" }
+    weight { 50 }
+    age { 7 }
+  end
+
   factory :sassy, class: "Pet" do
     name { "Sassy" }
     animal_type { "cat" }

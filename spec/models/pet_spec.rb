@@ -2,15 +2,15 @@ require 'rails_helper'
 
 RSpec.describe Pet, type: :model do
   let(:casey) {
-    Pet.new(
-      name: "Casey",
-      animal_type: "Dog",
-      breed: "German Shepherd Dog",
-      gender: "female",
-      color: "Black and Tan",
-      weight: 50,
-      age: 7
-    )
+    build(:casey)
+  }
+
+  let(:spot) {
+    build(:spot)
+  }
+
+  let(:tom) {
+    build(:tom)
   }
 
   context "Model" do
@@ -46,6 +46,15 @@ RSpec.describe Pet, type: :model do
 
   context "Associations" do
     before do
+      spot.owner = tom
+      casey.owner = tom
+      spot.save
+      casey.save
+    end
+
+    it "can have an owner" do
+      expect(casey.owner).to eq(tom)
+      expect(spot.owner).to eq(tom)
     end
   end
-end 
+end
