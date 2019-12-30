@@ -5,13 +5,21 @@ RSpec.describe User, type: :model do
   let(:admin) { build(:admin) }
   let(:spot) { build(:spot) }
   let(:sassy) { build(:sassy) }
-  let(:appt) { build(:appt) }
+  let(:appointment) { build(:appointment) }
+  let(:invoice) { build(:invoice) }
 
   before do
     spot.owner = tom
-    spot.save
     sassy.owner = tom
+    spot.save
     sassy.save
+
+    appointment.pet = sassy
+    appointment.save
+
+    invoice.appointment = appointment
+    invoice.pet = sassy
+    invoice.save
   end
 
   describe "Model" do
@@ -69,7 +77,7 @@ RSpec.describe User, type: :model do
     end
 
     it "has many appointments, through pets" do
-      expect(tom.appointments).to include(appt)
+      expect(tom.appointments).to include(appointment)
     end
   end
 end

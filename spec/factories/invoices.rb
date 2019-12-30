@@ -1,9 +1,5 @@
 FactoryBot.define do
-  factory :invoice_one, class: "Invoice" do
-    total { 137 }
-  end
-
-  factory :invoice_two, class: "Invoice" do
-    total { 597 }
+  factory :invoice, class: "Invoice" do
+    cents { 13719 }
   end
 end

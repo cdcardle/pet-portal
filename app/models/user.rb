@@ -2,6 +2,8 @@ class User < ApplicationRecord
   enum role: [:owner, :admin]
 
   has_many :pets
+  has_many :appointments, through: :pets
+  has_many :invoices, through: :pets
   
   devise :database_authenticatable, :registerable, :validatable
 

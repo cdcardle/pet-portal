@@ -5,7 +5,7 @@ RSpec.describe Pet, type: :model do
   let(:spot) { build(:spot) }
   let(:tom) { build(:tom) }
   let(:appointment) { build(:appointment) }
-  let(:invoice_one) { build(:invoice_one) }
+  let(:invoice) { build(:invoice) }
 
   describe "Model" do
 
@@ -14,7 +14,7 @@ RSpec.describe Pet, type: :model do
     end
 
     it 'has an animal_type' do
-      expect(casey.animal_type).to eq("Dog")
+      expect(casey.animal_type).to eq("dog")
     end
 
     it 'has a breed' do
@@ -48,9 +48,9 @@ RSpec.describe Pet, type: :model do
       appointment.pet = casey
       appointment.save
 
-      invoice_one.appointment = appointment
-      invoice_one.pet = casey
-      invoice_one.save
+      invoice.appointment = appointment
+      invoice.pet = casey
+      invoice.save
     end
 
     it "has an owner" do
@@ -63,7 +63,7 @@ RSpec.describe Pet, type: :model do
     end
 
     it "has many invoices" do
-      expect(casey.invoices).to include(invoice_one)
+      expect(casey.invoices).to include(invoice)
     end
   end
 end

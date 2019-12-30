@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 2019_12_27_201654) do
   end
 
   create_table "invoices", force: :cascade do |t|
-    t.decimal "total"
+    t.integer "cents"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "appointment_id"

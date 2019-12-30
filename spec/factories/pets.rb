@@ -11,7 +11,7 @@ FactoryBot.define do
 
   factory :casey, class: "Pet" do
     name { "Casey" }
-    animal_type { "Dog" }
+    animal_type { "dog" }
     breed { "German Shepherd Dog" }
     gender { "female" }
     color { "Black and Tan" }
