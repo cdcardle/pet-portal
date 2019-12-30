@@ -4,10 +4,10 @@ RSpec.describe Pet, type: :model do
   let(:casey) { build(:casey) }
   let(:spot) { build(:spot) }
   let(:tom) { build(:tom) }
-  let(:appt_one) { build(:appt_one) }
-  let(:appt_two) { build(:appt_two) }
+  let(:appointment) { build(:appointment) }
+  let(:invoice_one) { build(:invoice_one) }
 
-  context "Model" do
+  describe "Model" do
 
     it 'has a name' do
       expect(casey.name).to eq("Casey")
@@ -38,17 +38,19 @@ RSpec.describe Pet, type: :model do
     end
   end
 
-  context "Associations" do
+  describe "Associations" do
     before do
       spot.owner = tom
       casey.owner = tom
       spot.save
       casey.save
 
-      appt_one.pet = casey
-      appt_two.pet = casey
-      appt_one.save
-      appt_two.save
+      appointment.pet = casey
+      appointment.save
+
+      invoice_one.appointment = appointment
+      invoice_one.pet = casey
+      invoice_one.save
     end
 
     it "has an owner" do
@@ -57,8 +59,11 @@ RSpec.describe Pet, type: :model do
     end
     
     it "has many appointments" do
-      expect(casey.appointments).to include(appt_one)
-      expect(casey.appointments).to include(appt_two)
+      expect(casey.appointments).to include(appointment)
+    end
+
+    it "has many invoices" do
+      expect(casey.invoices).to include(invoice_one)
     end
   end
 end

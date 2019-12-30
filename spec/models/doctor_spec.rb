@@ -1,19 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe Doctor, type: :model do
-  let(:doc) {
-    Doctor.new(
-      first_name: "Will",
-      last_name: "Smith"
-    )
-  }
+  let(:doctor) { build :doctor }
 
   it "has a first and last name" do
-    expect(doc.first_name).to eq("Will")
-    expect(doc.last_name).to eq("Smith")
+    expect(doctor.first_name).to eq("Carol")
+    expect(doctor.last_name).to eq("Antique")
   end
 
   it "responds to name" do
-    expect(doc.name).to eq("Dr. Will Smith")
+    expect(doctor.name).to eq("Dr. Carol Antique")
   end
 end

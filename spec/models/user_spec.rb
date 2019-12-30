@@ -1,23 +1,20 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  let(:tom) {
-    build(:tom)
-  }
+  let(:tom) { build(:tom) }
+  let(:admin) { build(:admin) }
+  let(:spot) { build(:spot) }
+  let(:sassy) { build(:sassy) }
+  let(:appt) { build(:appt) }
 
-  let(:admin) {
-    build(:admin)
-  }
+  before do
+    spot.owner = tom
+    spot.save
+    sassy.owner = tom
+    sassy.save
+  end
 
-  let(:spot) {
-    build(:spot)
-  }
-
-  let(:sassy) {
-    build(:sassy)
-  }
-
-  context "Model" do
+  describe "Model" do
     it 'has an email' do
       expect(tom.email).to eq("tom_example@yahoo.com")
     end
@@ -64,18 +61,15 @@ RSpec.describe User, type: :model do
     end
   end
 
-  context "Associations" do
-    before do
-      spot.owner = tom
-      spot.save
-      sassy.owner = tom
-      sassy.save
-    end
-    
+  describe "Associations" do    
     it "has many pets" do
       expect(tom.pets.size).to eq(2)
       expect(tom.pets).to include(sassy)
       expect(tom.pets).to include(spot)
+    end
+
+    it "has many appointments, through pets" do
+      expect(tom.appointments).to include(appt)
     end
   end
 end
