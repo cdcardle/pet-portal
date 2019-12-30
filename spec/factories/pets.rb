@@ -1,13 +1,13 @@
 FactoryBot.define do
-  factory :spot, class: "Pet" do
-    name { "Spot" }
-    animal_type { "dog" }
-    breed { "Beagle" }
-    weight { 35 }
-    age { 8 }
-    color { "brown and white" }
-    gender { "male" }
-  end
+  # factory :spot, class: "Pet" do
+  #   name { "Spot" }
+  #   animal_type { "dog" }
+  #   breed { "Beagle" }
+  #   weight { 35 }
+  #   age { 8 }
+  #   color { "brown and white" }
+  #   gender { "male" }
+  # end
 
   factory :casey, class: "Pet" do
     name { "Casey" }
@@ -19,13 +19,13 @@ FactoryBot.define do
     age { 7 }
   end
 
-  factory :sassy, class: "Pet" do
-    name { "Sassy" }
-    animal_type { "cat" }
-    breed { "Calico" }
-    weight { 13 }
-    age { 36 }
-    color { "orange and brown" }
-    gender { "female" }
-  end
+  # factory :sassy, class: "Pet" do
+  #   name { "Sassy" }
+  #   animal_type { "cat" }
+  #   breed { "Calico" }
+  #   weight { 13 }
+  #   age { 36 }
+  #   color { "orange and brown" }
+  #   gender { "female" }
+  # end
 end

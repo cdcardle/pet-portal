@@ -2,10 +2,10 @@ require 'rails_helper'
 
 RSpec.describe Pet, type: :model do
   let(:casey) { build(:casey) }
-  let(:spot) { build(:spot) }
   let(:tom) { build(:tom) }
   let(:appointment) { build(:appointment) }
   let(:invoice) { build(:invoice) }
+  let(:doctor) { build(:doctor) }
 
   describe "Model" do
 
@@ -40,12 +40,11 @@ RSpec.describe Pet, type: :model do
 
   describe "Associations" do
     before do
-      spot.owner = tom
       casey.owner = tom
-      spot.save
       casey.save
 
       appointment.pet = casey
+      appointment.doctor = doctor
       appointment.save
 
       invoice.appointment = appointment
@@ -55,7 +54,6 @@ RSpec.describe Pet, type: :model do
 
     it "has an owner" do
       expect(casey.owner).to eq(tom)
-      expect(spot.owner).to eq(tom)
     end
     
     it "has many appointments" do
@@ -64,6 +62,10 @@ RSpec.describe Pet, type: :model do
 
     it "has many invoices" do
       expect(casey.invoices).to include(invoice)
+    end
+
+    it "has many doctors, through appointments" do
+      expect(casey.doctors).to include(doctor)
     end
   end
 end

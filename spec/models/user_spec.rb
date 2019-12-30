@@ -3,24 +3,10 @@ require 'rails_helper'
 RSpec.describe User, type: :model do
   let(:tom) { build(:tom) }
   let(:admin) { build(:admin) }
-  let(:spot) { build(:spot) }
-  let(:sassy) { build(:sassy) }
+  let(:casey) { build(:casey) }
   let(:appointment) { build(:appointment) }
   let(:invoice) { build(:invoice) }
-
-  before do
-    spot.owner = tom
-    sassy.owner = tom
-    spot.save
-    sassy.save
-
-    appointment.pet = sassy
-    appointment.save
-
-    invoice.appointment = appointment
-    invoice.pet = sassy
-    invoice.save
-  end
+  let(:doctor) { build(:doctor) }
 
   describe "Model" do
     it 'has an email' do
@@ -69,15 +55,31 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe "Associations" do    
+  describe "Associations" do
+    before do
+      casey.owner = tom
+      casey.save
+  
+      appointment.pet = casey
+      appointment.doctor = doctor
+      appointment.save
+  
+      invoice.appointment = appointment
+      invoice.pet = casey
+      invoice.save
+    end
+
     it "has many pets" do
-      expect(tom.pets.size).to eq(2)
-      expect(tom.pets).to include(sassy)
-      expect(tom.pets).to include(spot)
+      expect(tom.pets.size).to eq(1)
+      expect(tom.pets).to include(casey)
     end
 
     it "has many appointments, through pets" do
       expect(tom.appointments).to include(appointment)
+    end
+
+    it "has many invoices, through pets" do
+      expect(tom.invoices).to include(invoice)
     end
   end
 end

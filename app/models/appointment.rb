@@ -1,6 +1,7 @@
 class Appointment < ApplicationRecord
-  has_many :invoices
+  has_one :invoice
   belongs_to :pet
+  belongs_to :doctor
 
   validates_presence_of :datetime
 
