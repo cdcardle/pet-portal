@@ -7,7 +7,11 @@ class User < ApplicationRecord
   
   devise :database_authenticatable, :registerable, :validatable
 
-  validates_presence_of :email, :password, :first_name, :last_name, :first_street_address, :state, :zipcode
+  validates_presence_of :first_name, unless: lambda {role == "admin"}
+  validates_presence_of :last_name, unless: lambda {role == "admin"}
+  validates_presence_of :first_street_address, unless: lambda {role == "admin"}
+  validates_presence_of :state, unless: lambda {role == "admin"}
+  validates_presence_of :zipcode, unless: lambda {role == "admin"}
   validates_uniqueness_of :email
 
   after_initialize :set_default_second_street_address, :set_default_role
@@ -22,6 +26,10 @@ class User < ApplicationRecord
     else
       "#{first_street_address}, #{city}, #{state} #{zipcode}"
     end
+  end
+
+  def is_admin?
+    role == "admin"
   end
 
   private
