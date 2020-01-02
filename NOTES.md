@@ -33,4 +33,12 @@ Models
       has_many patients, class: pets, through: :appointments
     Invoices
       belongs_to appointment
-      belongs_to owner
+      belongs_to pet
+
+Controllers
+
+  Users
+  Pets
+  Appointments
+  Doctors
+  Invoices

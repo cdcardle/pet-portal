@@ -11,4 +11,8 @@ class Invoice < ApplicationRecord
   def date
     appointment.date
   end
+
+  def payer
+    pet.owner
+  end
 end
