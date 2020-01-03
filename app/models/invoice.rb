@@ -1,9 +1,12 @@
 class Invoice < ApplicationRecord
   belongs_to :appointment
-  belongs_to :pet
 
   validates_presence_of :cents
 
+  def pet
+    appointment.pet
+  end
+  
   def total
     cents / 100.00
   end

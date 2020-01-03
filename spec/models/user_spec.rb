@@ -1,53 +1,53 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  let(:tom) { build(:tom) }
   let(:admin) { build(:admin) }
-  let(:casey) { build(:casey) }
+  let(:user) { build(:user) }
+  let(:pet) { build(:pet) }
   let(:appointment) { build(:appointment) }
   let(:invoice) { build(:invoice) }
   let(:doctor) { build(:doctor) }
 
   describe "Model" do
     it 'has an email' do
-      expect(tom.email).to eq("tom_example@yahoo.com")
+      expect(user.email).to eq("tom_example@yahoo.com")
     end
     
     it 'has a first name' do
-      expect(tom.first_name).to eq("Tom")
+      expect(user.first_name).to eq("Tom")
     end
 
     it 'has a last name' do
-      expect(tom.last_name).to eq("Johnson")
+      expect(user.last_name).to eq("Johnson")
     end
 
     it 'has a first street address' do
-      expect(tom.first_street_address).to eq("1234 Example Rd.")
+      expect(user.first_street_address).to eq("1234 Example Rd.")
     end
 
     it "has a city" do
-      expect(tom.city).to eq("Exampletown")
+      expect(user.city).to eq("Exampletown")
     end
 
     it 'has a state' do
-      expect(tom.state).to eq("Example")
+      expect(user.state).to eq("Example")
     end
 
     it 'has a zipcode' do
-      expect(tom.zipcode).to eq(12345)
+      expect(user.zipcode).to eq(12345)
     end
 
     it "has a role" do
-      expect(tom.role).to eq("owner")
+      expect(user.role).to eq("owner")
       expect(admin.role).to eq("admin")
     end
 
     it "responds to name" do
-      expect(tom.name).to eq("Tom Johnson")
+      expect(user.name).to eq("Tom Johnson")
     end
 
     it "responds to address with a second street address" do
-      expect(tom.address).to eq("1234 Example Rd., Apt 201, Exampletown, Example 12345")
+      expect(user.address).to eq("1234 Example Rd., Apt 201, Exampletown, Example 12345")
     end
 
     it "responds to address without a second street address" do
@@ -57,29 +57,28 @@ RSpec.describe User, type: :model do
 
   describe "Associations" do
     before do
-      casey.owner = tom
-      casey.save
+      pet.owner = user
+      pet.save
   
-      appointment.pet = casey
+      appointment.pet = pet
       appointment.doctor = doctor
       appointment.save
   
       invoice.appointment = appointment
-      invoice.pet = casey
       invoice.save
     end
 
     it "has many pets" do
-      expect(tom.pets.size).to eq(1)
-      expect(tom.pets).to include(casey)
+      expect(user.pets.size).to eq(1)
+      expect(user.pets).to include(pet)
     end
 
     it "has many appointments, through pets" do
-      expect(tom.appointments).to include(appointment)
+      expect(user.appointments).to include(appointment)
     end
 
     it "has many invoices, through pets" do
-      expect(tom.invoices).to include(invoice)
+      expect(user.invoices).to include(invoice)
     end
   end
 end

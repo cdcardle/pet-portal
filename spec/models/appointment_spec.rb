@@ -1,9 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe Appointment, type: :model do
+  let(:user) { build(:user) }
+  let(:pet) { build(:pet) }
   let(:appointment) { build(:appointment) }
-  let(:casey) { build(:casey) }
-  let(:tom) { build(:tom) }
   let(:invoice) { build(:invoice) }
   let(:doctor) { build(:doctor) }
 
@@ -17,20 +17,19 @@ RSpec.describe Appointment, type: :model do
 
   describe "Associations" do
     before do
-      casey.owner = tom
-      casey.save
+      pet.owner = user
+      pet.save
 
-      appointment.pet = casey
+      appointment.pet = pet
       appointment.doctor = doctor
       appointment.save
 
       invoice.appointment = appointment
-      invoice.pet = casey
       invoice.save
     end
 
     it "has a pet" do
-      expect(appointment.pet).to eq(casey)
+      expect(appointment.pet).to eq(pet)
     end
 
     it "as a doctor" do

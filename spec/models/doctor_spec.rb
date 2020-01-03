@@ -1,9 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe Doctor, type: :model do
+  let(:user) { build(:user) }
+  let(:pet) { build(:pet) }
   let(:appointment) { build(:appointment) }
-  let(:casey) { build(:casey) }
-  let(:tom) { build(:tom) }
   let(:invoice) { build(:invoice) }
   let(:doctor) { build(:doctor) }
 
@@ -20,15 +20,14 @@ RSpec.describe Doctor, type: :model do
 
   describe "Associations" do
     before do
-      casey.owner = tom
-      casey.save
+      pet.owner = user
+      pet.save
 
-      appointment.pet = casey
+      appointment.pet = pet
       appointment.doctor = doctor
       appointment.save
 
       invoice.appointment = appointment
-      invoice.pet = casey
       invoice.save
     end
 
@@ -37,7 +36,7 @@ RSpec.describe Doctor, type: :model do
     end
 
     it "has many pets, through appointments" do
-      expect(doctor.pets).to include(casey)
+      expect(doctor.pets).to include(pet)
     end
   end
 end
