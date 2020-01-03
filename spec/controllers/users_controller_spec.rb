@@ -3,11 +3,24 @@ require 'rails_helper'
 RSpec.describe UsersController, type: :controller do
   render_views
 
-  let(:appointment) { build(:appointment) }
-  let(:pet) { build(:pet) }
+  let(:admin) { build(:admin) }
   let(:user) { build(:user) }
+  let(:pet) { build(:pet) }
+  let(:appointment) { build(:appointment) }
   let(:invoice) { build(:invoice) }
   let(:doctor) { build(:doctor) }
+
+  before do
+    pet.owner = user
+    pet.save
+
+    appointment.pet = pet
+    appointment.doctor = doctor
+    appointment.save
+
+    invoice.appointment = appointment
+    invoice.save
+  end
 
   describe "GET #index" do
     before do
@@ -19,7 +32,7 @@ RSpec.describe UsersController, type: :controller do
     end
 
     it "has a list of users" do
-      expect(response.body).to include()
+      expect(response.body).to include(user.name)
     end
   end
 
