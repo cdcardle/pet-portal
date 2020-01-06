@@ -1,3 +1,29 @@
 <h1>Create User</h1>
 
-# form for new user
+<%= form_with model: @user do |f| %>
+  <%= f.label :email %>
+  <%= f.text_field :email %><br>
+  <%= f.label :password %>
+  <%= f.text_field :password %><br></br>
+
+  <%= f.label :first_name %>
+  <%= f.text_field :first_name %><br>
+  <%= f.label :last_name %>
+  <%= f.text_field :last_name %><br></br>
+
+  <%= f.label :first_street_address %>
+  <%= f.text_field :first_street_address %><br>
+  <%= f.label :second_street_address %>
+  <%= f.text_field :second_street_address %><br>
+  <%= f.label :city %>
+  <%= f.text_field :city %><br>
+  <%= f.label :state %>
+  <%= f.text_field :state %><br>
+  <%= f.label :zipcode %>
+  <%= f.text_field :zipcode %><br></br>
+
+  <%= f.label "Admin?" %>
+  <%= f.check_box :role %><br></br>
+
+  <%= f.submit %>
+<% end %>

@@ -31,14 +31,18 @@ RSpec.describe UsersController, type: :controller do
       expect(response.status).to eq(200)
     end
 
-    it "has a list of users" do
+    it "has a list of owners" do
       expect(response.body).to include(user.name)
     end
   end
 
   describe "GET #new" do
-    it "has a form for a new user" do
+    it "has a 200 response" do
+      expect(response.status).to eq(200)
+    end
 
+    it "has a form for a new user" do
+      expect(response.body).to include("Email Address:")
     end
   end
 end
