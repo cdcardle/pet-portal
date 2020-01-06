@@ -4,7 +4,7 @@
   <%= f.label :email %>
   <%= f.text_field :email %><br>
   <%= f.label :password %>
-  <%= f.text_field :password %><br></br>
+  <%= f.password_field :password %><br></br>
 
   <%= f.label :first_name %>
   <%= f.text_field :first_name %><br>
@@ -20,7 +20,7 @@
   <%= f.label :state %>
   <%= f.text_field :state %><br>
   <%= f.label :zipcode %>
-  <%= f.text_field :zipcode %><br></br>
+  <%= f.number_field :zipcode, maxlength: 5 %><br></br>
 
   <%= f.label "Admin?" %>
   <%= f.check_box :role %><br></br>
