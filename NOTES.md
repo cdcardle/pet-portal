@@ -1,5 +1,4 @@
 Models
-
   Attributes
     User
       email, password, first name, last name, street address one, street address two, state, zipcode, role
@@ -36,9 +35,17 @@ Models
       belongs_to pet
 
 Controllers
-
   Users
   Pets
   Appointments
   Doctors
   Invoices
+
+Views
+  Users
+    Index - admin only
+    New - admin only
+    Show - owner/admin
+    Edit - owner(some)/admin(all)
+    Delete - admin only
+
