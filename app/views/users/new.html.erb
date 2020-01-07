@@ -30,13 +30,17 @@
 
 <%= simple_form_for @user do |f| %>
   <%= f.input :email, required: true %>
-  <%= f.input :password, required: true %><br>
+  <%= f.input :password, required: true %>
+  <br>
   <%= f.input :first_name, required: true %>
-  <%= f.input :last_name, required: true %><br>
+  <%= f.input :last_name, required: true %>
+  <br>
   <%= f.input :first_street_address, required: true %>
   <%= f.input :second_street_address, required: false %>
   <%= f.input :city, required: true %>
-  <%= f.input :state, required: true %>
+  <%= f.input :state, as: :select, collection: User::STATES, placeholder: "STATE" %>
   <%= f.input :zipcode, required: true %>
-  <%= f.input :role, required: true %>
+  <%= f.input :role, as: :boolean, required: true %>
+  <br>
+  <%= f.submit %>
 <% end %>

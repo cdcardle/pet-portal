@@ -1,6 +1,10 @@
-<%= tag.p class: "alert alert-success" do %>
-  <%= notice if notice %>
+<% if notice %>
+  <%= tag.p class: "alert alert-success" do %>
+    <%= notice %>
+  <% end %>
 <% end %>
-<%= tag.p class: "alert alert-danger" do %>
-  <%= alert if alert %>
+<% if alert %>
+  <%= tag.p class: "alert alert-danger" do %>
+    <%= alert %>
+  <% end %>
 <% end %>
