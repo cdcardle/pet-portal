@@ -62,3 +62,24 @@ RSpec.configure do |config|
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
 end
+
+RSpec.shared_examples "create models" do
+  let(:admin) { build(:admin) }
+  let(:user) { build(:user) }
+  let(:pet) { build(:pet) }
+  let(:appointment) { build(:appointment) }
+  let(:invoice) { build(:invoice) }
+  let(:doctor) { build(:doctor) }
+
+  before do
+    pet.owner = user
+    pet.save
+
+    appointment.pet = pet
+    appointment.doctor = doctor
+    appointment.save
+
+    invoice.appointment = appointment
+    invoice.save
+  end
+end
