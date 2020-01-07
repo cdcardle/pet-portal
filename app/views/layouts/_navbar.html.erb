@@ -1,9 +1,9 @@
 <nav class="navbar navbar-light bg-light">
   <a class="navbar-brand btn btn-outline-dark" href="/">Home</a>
   <form class="form-inline">
-    <a class="btn btn-outline-dark" href="/signup">Register</a>
+    <%= link_to "Register", new_user_path, class: "btn btn-outline-dark" %>
     <div style="padding-left: 10px;">
-      <a class="btn btn-outline-dark" href="/login">Log In</a>
+      <%= link_to "Log In", signin_path, class: "btn btn-outline-dark" %>
     </div>
   </form>
 </nav>
