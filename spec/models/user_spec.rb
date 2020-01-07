@@ -2,11 +2,7 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   let(:admin) { build(:admin) }
-  let(:user) { build(:user) }
-  let(:pet) { build(:pet) }
-  let(:appointment) { build(:appointment) }
-  let(:invoice) { build(:invoice) }
-  let(:doctor) { build(:doctor) }
+  include_examples "create models"
 
   describe "Model" do
     it 'has an email' do
@@ -56,18 +52,6 @@ RSpec.describe User, type: :model do
   end
 
   describe "Associations" do
-    before do
-      pet.owner = user
-      pet.save
-  
-      appointment.pet = pet
-      appointment.doctor = doctor
-      appointment.save
-  
-      invoice.appointment = appointment
-      invoice.save
-    end
-
     it "has many pets" do
       expect(user.pets.size).to eq(1)
       expect(user.pets).to include(pet)

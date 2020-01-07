@@ -1,11 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Invoice, type: :model do
-  let(:user) { build(:user) }
-  let(:pet) { build(:pet) }
-  let(:appointment) { build(:appointment) }
-  let(:invoice) { build(:invoice) }
-  let(:doctor) { build(:doctor) }
+  include_examples "create models"
 
   describe "Model" do
     it "has a total" do
@@ -14,18 +10,6 @@ RSpec.describe Invoice, type: :model do
   end
 
   describe "Associations" do
-    before do
-      pet.owner = user
-      pet.save
-
-      appointment.pet = pet
-      appointment.doctor = doctor
-      appointment.save
-
-      invoice.appointment = appointment
-      invoice.save
-    end
-
     it "has an appointment" do
       expect(invoice.appointment).to eq(appointment)
     end

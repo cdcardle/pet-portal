@@ -1,11 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Pet, type: :model do
-  let(:user) { build(:user) }
-  let(:pet) { build(:pet) }
-  let(:appointment) { build(:appointment) }
-  let(:invoice) { build(:invoice) }
-  let(:doctor) { build(:doctor) }
+  include_examples "create models"
 
   describe "Model" do
 
@@ -39,18 +35,6 @@ RSpec.describe Pet, type: :model do
   end
 
   describe "Associations" do
-    before do
-      pet.owner = user
-      pet.save
-
-      appointment.pet = pet
-      appointment.doctor = doctor
-      appointment.save
-
-      invoice.appointment = appointment
-      invoice.save
-    end
-
     it "has an owner" do
       expect(pet.owner).to eq(user)
     end

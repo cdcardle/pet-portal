@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe UsersController, type: :controller do
   render_views
 
+  let(:admin) { build(:admin) }
   include_examples "create models"
 
   describe "GET #index" do
@@ -28,7 +29,7 @@ RSpec.describe UsersController, type: :controller do
       expect(response.status).to eq(200)
     end
 
-    it "renders new view" do
+    it "renders new view if admin" do
       expect(response).to render_template(:new)
     end
   end

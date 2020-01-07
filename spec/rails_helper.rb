@@ -64,7 +64,6 @@ RSpec.configure do |config|
 end
 
 RSpec.shared_examples "create models" do
-  let(:admin) { build(:admin) }
   let(:user) { build(:user) }
   let(:pet) { build(:pet) }
   let(:appointment) { build(:appointment) }
