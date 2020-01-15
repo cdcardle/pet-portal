@@ -5,10 +5,10 @@ class User < ApplicationRecord
   has_many :appointments, through: :pets
   has_many :invoices, through: :pets
   
-  devise :database_authenticatable, :registerable, :validatable
+  devise :database_authenticatable, :validatable
 
-  validates_presence_of :first_name, unless: lambda {role == "admin"}
-  validates_presence_of :last_name, unless: lambda {role == "admin"}
+  validates_presence_of :first_name
+  validates_presence_of :last_name
   validates_presence_of :first_street_address, unless: lambda {role == "admin"}
   validates_presence_of :state, unless: lambda {role == "admin"}
   validates_presence_of :zipcode, unless: lambda {role == "admin"}
@@ -26,10 +26,6 @@ class User < ApplicationRecord
     else
       "#{first_street_address}, #{city}, #{state} #{zipcode}"
     end
-  end
-
-  def is_admin?
-    role == "admin"
   end
 
   STATES = [
@@ -94,6 +90,6 @@ class User < ApplicationRecord
   end
 
   def set_default_role
-    role |= 0
+    role |= "owner"
   end
 end

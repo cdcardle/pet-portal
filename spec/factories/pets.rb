@@ -17,6 +17,7 @@ FactoryBot.define do
     color { "Black and Tan" }
     weight { 50 }
     age { 7 }
+    user_id { 1 }
   end
 
   # factory :sassy, class: "Pet" do

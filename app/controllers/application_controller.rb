@@ -1,13 +1,11 @@
 class ApplicationController < ActionController::Base
-  private
+  protected
 
-  def logged_in?
-    !!session[:user_id]
+  def after_sign_in_path_for(resource)
+    user_path(current_user)
   end
 
-  def current_user
-    @current_user ||= User.find(session[:user_id]) if session[:user_id]
+  def after_sign_out_path_for(resource)
+    root_path
   end
-  helper_method :current_user
-  helper_method :logged_in?
 end

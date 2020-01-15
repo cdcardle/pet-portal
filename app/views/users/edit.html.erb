@@ -1,0 +1,22 @@
+<h3>Editing Account Information...</h3>
+
+<%= simple_form_for @user do |f| %>
+  <%= f.input :email, value: @user.email, disabled: true %>
+
+  <%= f.input :first_name, value: @user.first_name, required: false %>
+  <%= f.input :last_name, value: @user.last_name, required: false %><br>
+
+  <%= f.input :first_street_address, value: @user.first_street_address %>
+  <%= f.input :second_street_address, value: @user.second_street_address %>
+  <%= f.input :city, value: @user.city %>
+  <%= f.input :state, as: :select, collection: User::STATES, value: "STATE, value: user.state" %>
+  <%= f.input :zipcode, value: @user.zipcode %>
+
+  <% if user_signed_in? %>
+    <% if current_user.admin? %>
+      <%= f.input :role, label: "Admin?", as: :boolean %>
+    <% end %>
+  <% end %><br>
+
+  <%= f.submit "Update" %>
+<% end %>

@@ -1,9 +1,0 @@
-<%= simple_form_for :sessions, :url => sessions_create_path, :html => { :class => 'form-vertical' } do |f| %>
-
-  <%= f.input :email, :required =>false, :label => 'Email Address', :placeholder => 'Email Address' %>
-
-  <%= f.input :password, :required =>false, :placeholder => 'Password' %>
-
-<%= f.submit "Login" %>
-
-<% end %>

@@ -44,8 +44,8 @@ Controllers
 Views
   Users
     Index - admin only
-    New - admin only
-    Show - owner/admin
-    Edit - owner(some)/admin(all)
+    New - visitors and admins
+    Show - owner their own, admin everyone's
+    Edit - owner their own, admin everyone's
     Delete - admin only
 

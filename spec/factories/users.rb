@@ -9,7 +9,7 @@ FactoryBot.define do
     city { "Exampletown" }
     state { "Example" }
     zipcode { 12345 }
-    role { 0 }
+    role { "owner" }
   end
 
   factory :admin, class: "User" do
@@ -21,6 +21,6 @@ FactoryBot.define do
     city { "Exampletown" }
     state { "Example" }
     zipcode { 12345 }
-    role { 1 }
+    role { "admin" }
   end
 end
