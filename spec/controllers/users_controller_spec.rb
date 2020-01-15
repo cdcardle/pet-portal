@@ -12,7 +12,7 @@ RSpec.describe UsersController, type: :controller do
     @request.env["devise.mapping"] = Devise.mappings[:user]
   end
 
-  describe "GET #index" do
+  describe "#index" do
     it "renders index view if logged in as admin" do
       sign_in admin_user, scope: :user
       get :index
@@ -29,7 +29,7 @@ RSpec.describe UsersController, type: :controller do
     end
   end
 
-  describe "GET #new" do
+  describe "#new" do
     it "renders new view if logged in as admin" do
       sign_in admin_user, scope: :user
       get :new
@@ -48,7 +48,7 @@ RSpec.describe UsersController, type: :controller do
     end
   end
 
-  describe "POST #create" do
+  describe "#create" do
     it "creates a new owner user and redirects to new user's show if logged in as admin" do
       user_count = User.count
       sign_in admin_user, scope: :user
@@ -75,8 +75,8 @@ RSpec.describe UsersController, type: :controller do
     end
   end
 
-  describe "GET #show" do
-    describe "Own show page" do
+  describe "#show" do
+    describe "own show page" do
       it "renders if logged in as admin" do
         sign_in admin_user, scope: :user
         get :show, params: {id: admin_user.id}
@@ -90,7 +90,7 @@ RSpec.describe UsersController, type: :controller do
       end
     end
 
-    describe "Others show page" do
+    describe "others' show page" do
       it "renders if logged in as admin" do
         sign_in admin_user, scope: :user
         get :show, params: {id: user.id}
@@ -110,8 +110,8 @@ RSpec.describe UsersController, type: :controller do
     end
   end
 
-  describe "GET #edit" do
-    describe "Own edit page" do
+  describe "#edit" do
+    describe "own edit page" do
       it "renders if logged in as admin" do
         sign_in admin_user, scope: :user
         get :edit, params: {id: admin_user.id}
@@ -125,7 +125,7 @@ RSpec.describe UsersController, type: :controller do
       end
     end
     
-    describe "Others' edit page" do
+    describe "others' edit page" do
       it "renders if logged in as admin" do
         sign_in admin_user, scope: :user
         get :edit, params: {id: user.id}
@@ -142,6 +142,15 @@ RSpec.describe UsersController, type: :controller do
         get :edit, params: {id: 1}
         expect(response).to redirect_to(new_user_session_path)
       end
+    end
+  end
+
+  describe "#update" do
+    it "updates the user and redirects to that user's show page if logged in as admin" do
+      sign_in admin_user, scope: :user
+      post :update, params: {id: user.id, user: {zipcode: 11111}}
+      expect(User.find(user.id).zipcode).to eq(11111)
+      expect(response).to redirect_to(user_path(user))
     end
   end
 end
