@@ -160,6 +160,13 @@ RSpec.describe UsersController, type: :controller do
         expect(User.find(admin_user.id).zipcode).to eq(11111)
         expect(response).to redirect_to(user_path(admin_user))
       end
+
+      it "updates their own account and redirects to their show page if logged in as user" do
+        sign_in user, scope: :user
+        post :update, params: {id: user.id, user: {zipcode: 55555}}
+        expect(User.find(user.id).zipcode).to eq(55555)
+        expect(response).to redirect_to(user_path(user))
+      end
     end
   end
 end
