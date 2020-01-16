@@ -1,0 +1,10 @@
+<nav class="navbar navbar-light bg-light">
+  <%= link_to "Home", root_path, class: "navbar-brand btn btn-outline-dark" %>
+  
+  <form class="form-inline">
+    <%= link_to "Register", new_user_path, class: "btn btn-outline-dark" %>
+    <div style="padding-left: 10px;">
+      <%= link_to "Log In", user_session_path, class: "btn btn-outline-dark" %>
+    </div>
+  </form>
+</nav>

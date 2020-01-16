@@ -10,6 +10,7 @@ class User < ApplicationRecord
   validates_presence_of :first_name
   validates_presence_of :last_name
   validates_presence_of :first_street_address, unless: lambda {role == "admin"}
+  validates_presence_of :city, unless: lambda {role == "admin"}
   validates_presence_of :state, unless: lambda {role == "admin"}
   validates_presence_of :zipcode, unless: lambda {role == "admin"}
   validates_uniqueness_of :email

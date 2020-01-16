@@ -36,7 +36,9 @@ Models
 
 Controllers
   Users
+    Index, New, Show, Edit, Destroy
   Pets
+    Index, New, Show, Edit, Destroy
   Appointments
   Doctors
   Invoices
@@ -47,5 +49,11 @@ Views
     New - visitors and admins
     Show - owner their own, admin everyone's
     Edit - owner their own, admin everyone's
-    Delete - admin only
-
+    Destroy - admin only
+  
+  Pets
+    Index
+    New
+    Show
+    Edit
+    Destroy

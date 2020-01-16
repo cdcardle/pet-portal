@@ -176,5 +176,15 @@ RSpec.describe UsersController, type: :controller do
         delete :destroy, params: {id: User.last.id}
       }.to change(User, :count).by(-1)
     end
+
+    it "does nothing if not logged in as admin" do
+      expect {
+        delete :destroy, params: {id: User.last.id}
+      }.to_not change(User, :count)
+      sign_in user, scope: :user
+      expect {
+        delete :destroy, params: {id: User.last.id}
+      }.to_not change(User, :count)
+    end
   end
 end

@@ -18,7 +18,12 @@
 
   <body>
     <div class="container">
-      <%= render 'layouts/navbar' %>
+      <% if user_signed_in? %>
+        <%= render 'layouts/admin_navbar' if current_user.admin? %>
+        <%= render 'layouts/owner_navbar' if current_user.owner? %>
+      <% else %>
+        <%= render 'layouts/visitor_navbar' %>
+      <% end %>
       <%= render 'layouts/messages' %>
       <%= yield %>
     </div>
