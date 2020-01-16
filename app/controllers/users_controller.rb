@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  before_action :is_admin?, only: [:index, :delete]
-  before_action :authenticate_user!, only: [:index, :show, :edit, :delete]
+  before_action :is_admin?, only: [:index, :destroy]
+  before_action :authenticate_user!, only: [:index, :show, :edit, :destroy]
 
   def index
     @users = User.all
@@ -52,6 +52,11 @@ class UsersController < ApplicationController
     else
       redirect_back(fallback_location: root_path)
     end
+  end
+
+  def destroy
+    User.find(params[:id]).delete
+    redirect_to root_path, notice: "Account deleted."
   end
 
   private
