@@ -1,4 +1,4 @@
-<h3>Editing Account Information...</h3>
+<%= tag.h3 "Editing Account Information..." %>
 
 <%= simple_form_for @user do |f| %>
   <%= f.input :email, value: @user.email, disabled: true %>

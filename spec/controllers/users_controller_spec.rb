@@ -146,27 +146,35 @@ RSpec.describe UsersController, type: :controller do
   end
 
   describe "#update" do
-    describe "own edit page" do
-      it "updates the user and redirects to that user's show page if logged in as admin" do
-        sign_in admin_user, scope: :user
-        post :update, params: {id: user.id, user: {zipcode: 11111}}
-        expect(User.find(user.id).zipcode).to eq(11111)
-        expect(response).to redirect_to(user_path(user))
-      end
+    it "updates a user and redirects to that user's show page if logged in as admin" do
+      sign_in admin_user, scope: :user
+      post :update, params: {id: user.id, user: {zipcode: 11111}}
+      expect(User.find(user.id).zipcode).to eq(11111)
+      expect(response).to redirect_to(user_path(user))
+    end
 
-      it "updates the admin and redirects to that admin's show page if logged in as admin" do
-        sign_in admin_user, scope: :user
-        post :update, params: {id: admin_user.id, user: {zipcode: 11111}}
-        expect(User.find(admin_user.id).zipcode).to eq(11111)
-        expect(response).to redirect_to(user_path(admin_user))
-      end
+    it "updates an admin and redirects to that admin's show page if logged in as admin" do
+      sign_in admin_user, scope: :user
+      post :update, params: {id: admin_user.id, user: {zipcode: 11111}}
+      expect(User.find(admin_user.id).zipcode).to eq(11111)
+      expect(response).to redirect_to(user_path(admin_user))
+    end
 
-      it "updates their own account and redirects to their show page if logged in as user" do
-        sign_in user, scope: :user
-        post :update, params: {id: user.id, user: {zipcode: 55555}}
-        expect(User.find(user.id).zipcode).to eq(55555)
-        expect(response).to redirect_to(user_path(user))
-      end
+    it "updates their own account and redirects to their show page if logged in as user" do
+      sign_in user, scope: :user
+      post :update, params: {id: user.id, user: {zipcode: 55555}}
+      expect(User.find(user.id).zipcode).to eq(55555)
+      expect(response).to redirect_to(user_path(user))
+    end
+  end
+
+  describe "#destroy" do
+    it "deletes a user if logged in as admin" do
+      sign_in admin_user, scope: :user
+      post :create, params: {user: user_params}
+      expect {
+        delete :destroy, params: {id: User.last.id}
+      }.to change(User, :count).by(-1)
     end
   end
 end
