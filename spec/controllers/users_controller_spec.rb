@@ -146,11 +146,20 @@ RSpec.describe UsersController, type: :controller do
   end
 
   describe "#update" do
-    it "updates the user and redirects to that user's show page if logged in as admin" do
-      sign_in admin_user, scope: :user
-      post :update, params: {id: user.id, user: {zipcode: 11111}}
-      expect(User.find(user.id).zipcode).to eq(11111)
-      expect(response).to redirect_to(user_path(user))
+    describe "own edit page" do
+      it "updates the user and redirects to that user's show page if logged in as admin" do
+        sign_in admin_user, scope: :user
+        post :update, params: {id: user.id, user: {zipcode: 11111}}
+        expect(User.find(user.id).zipcode).to eq(11111)
+        expect(response).to redirect_to(user_path(user))
+      end
+
+      it "updates the admin and redirects to that admin's show page if logged in as admin" do
+        sign_in admin_user, scope: :user
+        post :update, params: {id: admin_user.id, user: {zipcode: 11111}}
+        expect(User.find(admin_user.id).zipcode).to eq(11111)
+        expect(response).to redirect_to(user_path(admin_user))
+      end
     end
   end
 end
