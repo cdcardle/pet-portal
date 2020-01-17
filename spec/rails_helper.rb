@@ -75,6 +75,8 @@ RSpec.shared_examples "create models" do
   let(:doctor) { build(:doctor) }
 
   before do
+    admin.save
+
     pet.owner = user
     pet.save
 

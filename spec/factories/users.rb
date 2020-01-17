@@ -13,7 +13,7 @@ FactoryBot.define do
   end
 
   factory :admin, class: "User" do
-    email { "admin_example@yahoo.com" }
+    email { "admin_email@yahoo.com" }
     password { "adminpassword" }
     first_name { "Admin" }
     last_name { "Smith" }
