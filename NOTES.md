@@ -36,24 +36,37 @@ Models
 
 Controllers
   Users
-    Index, New, Show, Edit, Destroy
-  Pets
-    Index, New, Show, Edit, Destroy
-  Appointments
-  Doctors
-  Invoices
-
-Views
-  Users
     Index - admin only
     New - visitors and admins
     Show - owner their own, admin everyone's
     Edit - owner their own, admin everyone's
     Destroy - admin only
+  Pets
+    Index - admin only
+    New - admin only
+    Show - owner their own, admin everyone's
+    Edit - admin only
+    Destroy - admin only
+  Appointments
+  Doctors
+  Invoices
+
+Views
+  Layout
+    Navbar
+      Admin
+      Owner
+      Visitor
+    Yield
+    Footer
+  Users
+    Index
+    New
+    Show
+    Edit
   
   Pets
     Index
     New
     Show
     Edit
-    Destroy
