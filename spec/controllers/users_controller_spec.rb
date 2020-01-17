@@ -50,27 +50,27 @@ RSpec.describe UsersController, type: :controller do
 
   describe "#create" do
     it "creates a new owner user and redirects to new user's show if logged in as admin" do
-      user_count = User.count
       sign_in admin_user, scope: :user
-      post :create, params: {user: user_params}
-      expect(User.count).to eq(user_count + 1)
+      expect{
+        post :create, params: {user: user_params}
+      }.to change(User, :count).by(1)
       expect(User.last.role).to eq("owner")
       expect(response).to redirect_to(user_path(User.last.id))
     end
 
     it "creates a new admin user and redirects to new user's show if logged in as admin" do
-      user_count = User.count
       sign_in admin_user, scope: :user
-      post :create, params: {user: admin_params}
-      expect(User.count).to eq(user_count + 1)
+      expect{
+        post :create, params: {user: admin_params}
+      }.to change(User, :count).by(1)
       expect(User.last.role).to eq("admin")
       expect(response).to redirect_to(user_path(User.last.id))
     end
 
     it "creates a new owner user, logs them in, and redirects to new user's show view if not logged in" do
-      user_count = User.count
-      post :create, params: {user: user_params}
-      expect(User.count).to eq(user_count + 1)
+      expect{
+        post :create, params: {user: user_params}
+      }.to change(User, :count).by(1)
       expect(response).to redirect_to(user_path(User.last.id))
     end
   end
@@ -181,6 +181,7 @@ RSpec.describe UsersController, type: :controller do
       expect {
         delete :destroy, params: {id: User.last.id}
       }.to_not change(User, :count)
+      
       sign_in user, scope: :user
       expect {
         delete :destroy, params: {id: User.last.id}
