@@ -6,5 +6,6 @@ Rails.application.routes.draw do
   root "static#home"
 
   resources :users
+  resources :pets
   resources :appointments
 end

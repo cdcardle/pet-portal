@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :is_admin?, only: [:index, :destroy]
-  before_action :authenticate_user!, only: [:index, :show, :edit, :destroy]
+  before_action :authenticate_user!, only: [:index, :show, :edit, :update, :destroy]
 
   def index
     @users = User.all
@@ -72,9 +72,5 @@ class UsersController < ApplicationController
     when 0
       "owner"
     end
-  end
-
-  def is_admin?
-    redirect_back(fallback_location: root_path) unless current_user && current_user.admin?
   end
 end

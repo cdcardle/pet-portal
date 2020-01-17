@@ -11,6 +11,10 @@ RSpec.describe PetsController, type: :controller do
       expect(response).to render_template(:index)
     end
 
-
+    it "redirects back if not admin" do
+      expect(
+        get :index, params: {headers: {"HTTP_REFERER" => "http://test.host"}}
+      ).to redirect_to(root_path)
+    end
   end
 end
