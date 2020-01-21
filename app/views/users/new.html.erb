@@ -10,7 +10,7 @@
   <%= f.input :first_street_address %>
   <%= f.input :second_street_address %>
   <%= f.input :city %>
-  <%= f.input :state, as: :select, collection: User::STATES, placeholder: "STATE" %>
+  <%= f.input :state, as: :select, collection: User::STATES, default: "Michigan" %>
   <%= f.input :zipcode %>
 
   <% if user_signed_in? %>

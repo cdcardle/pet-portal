@@ -1,0 +1,13 @@
+<h1>Create a Pet</h1>
+
+<%= simple_form_for @pet do |f| %>
+  <%= f.input :name, required: false %>
+  <%= f.input :animal_type, as: :select, collection: ["Dog", "Cat"], default: "Dog", required: false %>
+  <%= f.input :breed, required: false %>
+  <%= f.input :gender, as: :select, collection: ["Male", "Female"], default: "Male", required: false %>
+  <%= f.input :color, required: false %>
+  <%= f.input :weight, as: :tel, required: false %>
+  <%= f.input :age, as: :tel, required: false %>
+
+  <%= f.submit "Create Pet" %>
+<% end %>
