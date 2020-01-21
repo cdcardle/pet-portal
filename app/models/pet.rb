@@ -7,6 +7,6 @@ class Pet < ApplicationRecord
   validates_presence_of :name, :animal_type, :breed, :weight, :age, :color, :gender
 
   def age_in_years
-    age == 12 ? "#{age / 12} year" : "#{age / 12} years"
+    age == 12 ? "#{age / 12.0} year" : "#{age / 12.0} years"
   end
 end
