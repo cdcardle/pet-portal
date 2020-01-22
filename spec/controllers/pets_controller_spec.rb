@@ -36,6 +36,28 @@ RSpec.describe PetsController, type: :controller do
     end
   end
 
+  describe "#create" do
+    it "creates a new pet and redirects to their show page if admin" do
+      sign_in admin
+      expect{
+        post :create, params: {pet: pet_params}
+      }.to change(Pet, :count).by(1)
+      expect(Pet.last.name).to eq("Sassy")
+      expect(response).to redirect_to(pet_path(Pet.last.id))
+    end
+
+    it "redirects to new if not admin" do
+      expect{
+        post :create, params: {pet: pet_params}
+      }.to_not change(Pet, :count)
+      
+      sign_in user
+      expect{
+        post :create, params: {pet: pet_params}
+      }.to_not change(Pet, :count)
+    end
+  end
+
   describe "#show" do
     it "renders if admin" do
       sign_in admin
@@ -61,17 +83,6 @@ RSpec.describe PetsController, type: :controller do
       expect(
         get :show, params: {id: 1}
       ).to redirect_to(new_user_session_path)
-    end
-  end
-
-  describe "#create" do
-    it "creates a new pet and redirects to their show page if admin" do
-      sign_in admin
-      expect{
-        post :create, params: {pet: pet_params}
-      }.to change(Pet, :count).by(1)
-      expect(Pet.last.name).to eq("Sassy")
-      expect(response).to redirect_to(user_path(Pet.last.id))
     end
   end
 end
