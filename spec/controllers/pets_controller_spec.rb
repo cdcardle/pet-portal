@@ -4,6 +4,7 @@ RSpec.describe PetsController, type: :controller do
 
   include_examples "create models"
   let(:spot) { build(:spot) }
+  let(:pet_params) {{name: "Sassy", animal_type: "Cat", breed: "Calico", weight: 13, age: 36, color: "Orange and Brown", gender: "Female"}}
 
   describe "#index" do
     it "renders for admin" do
@@ -60,6 +61,17 @@ RSpec.describe PetsController, type: :controller do
       expect(
         get :show, params: {id: 1}
       ).to redirect_to(new_user_session_path)
+    end
+  end
+
+  describe "#create" do
+    it "creates a new pet and redirects to their show page if admin" do
+      sign_in admin
+      expect{
+        post :create, params: {pet: pet_params}
+      }.to change(Pet, :count).by(1)
+      expect(Pet.last.name).to eq("Sassy")
+      expect(response).to redirect_to(user_path(Pet.last.id))
     end
   end
 end
