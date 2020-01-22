@@ -141,12 +141,13 @@ RSpec.describe PetsController, type: :controller do
   end
 
   describe "#destroy" do
-    it "deletes a pet and redirects to root if admin" do
+    it "deletes a pet and redirects to pets#index if admin" do
       sign_in admin
+      post :create, params: {pet: pet_params}
       expect {
-        delete :destroy, params: {pet: Pet.last.id}
+        delete :destroy, params: {id: Pet.last.id}
       }.to change(Pet, :count).by(-1)
-      expect(response).to redirect_to(root_path)
+      expect(response).to redirect_to(pets_path)
     end
 
     it "does nothing if user" do
