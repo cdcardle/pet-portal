@@ -119,4 +119,13 @@ RSpec.describe PetsController, type: :controller do
       ).to redirect_to(new_user_session_path)
     end
   end
+
+  describe "#update" do
+    it "updates the pet and redirects to their show page if admin" do
+      sign_in admin
+      post :update, params: {id: 1, pet: {weight: 55}}
+      expect(Pet.find(1).weight).to eq(55)
+      expect(response).to redirect_to(pet_path(1))
+    end
+  end
 end

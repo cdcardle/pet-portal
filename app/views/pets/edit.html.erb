@@ -3,7 +3,7 @@
 <%= simple_form_for @pet do |f| %>
   <%= f.input :name, required: false, placeholder: @pet.name %>
   <%= f.input :animal_type, as: :select, collection: ["Dog", "Cat"], default: "Dog", required: false, placeholder: @pet.animal_type %>
-  <%= f.input :breed, required: false, placeholder: @pet. %>
+  <%= f.input :breed, required: false, placeholder: @pet.breed %>
   <%= f.input :gender, as: :select, collection: ["Male", "Female"], default: "Male", required: false, placeholder: @pet.gender %>
   <%= f.input :color, required: false, placeholder: @pet.color %>
   <%= f.input :weight, as: :tel, required: false, placeholder: @pet.weight %>
