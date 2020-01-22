@@ -48,6 +48,11 @@ Controllers
     Edit - admin only
     Destroy - admin only
   Appointments
+    Index - admin
+    New - admin
+    Show - user (theirs), admin (all)
+    Edit - admin
+    Destroy - admin
   Doctors
   Invoices
 
@@ -59,13 +64,20 @@ Views
       Visitor
     Yield
     Footer
+
   Users
     Index
     New
     Show
     Edit
-  
+
   Pets
+    Index
+    New
+    Show
+    Edit
+
+  Appointments
     Index
     New
     Show
