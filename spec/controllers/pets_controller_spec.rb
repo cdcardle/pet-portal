@@ -139,4 +139,27 @@ RSpec.describe PetsController, type: :controller do
       expect(response).to redirect_to(new_user_session_path)
     end
   end
+
+  describe "#destroy" do
+    it "deletes a pet and redirects to root if admin" do
+      sign_in admin
+      expect {
+        delete :destroy, params: {pet: Pet.last.id}
+      }.to change(Pet, :count).by(-1)
+      expect(response).to redirect_to(root_path)
+    end
+
+    it "does nothing if user" do
+      sign_in user
+      expect {
+        delete :destroy, params: {id: Pet.last.id}
+      }.to_not change(Pet, :count)
+    end
+
+    it "does nothing if not logged in" do
+      expect {
+        delete :destroy, params: {id: Pet.last.id}
+      }.to_not change(Pet, :count)
+    end
+  end
 end

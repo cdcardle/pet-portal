@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  before_action :is_admin?, only: [:index, :destroy]
   before_action :authenticate_user!, only: [:index, :show, :edit, :update, :destroy]
+  before_action :is_admin?, only: [:index, :destroy]
 
   def index
     @users = User.all
@@ -56,7 +56,7 @@ class UsersController < ApplicationController
 
   def destroy
     User.find(params[:id]).delete
-    redirect_to root_path, notice: "Account deleted."
+    redirect_to users_path, notice: "Account deleted."
   end
 
   private
