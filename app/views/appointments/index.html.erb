@@ -1,0 +1,19 @@
+<h1>Appointments</h1>
+
+<%= tag.table do %>
+  <%= tag.tr do %>
+    <%= tag.th "Date" %>
+    <%= tag.th "Time" %>
+    <%= tag.th "Pet" %>
+    <%= tag.th "Doctor" %>
+  <% end %>
+  
+  <% @appointments.each do |appointment| %>
+    <%= tag.tr do %>
+      <%= tag.th appointment.date %>
+      <%= tag.th appointment.time %>
+      <%= tag.th appointment.pet.name %>
+      <%= tag.th appointment.doctor.name %>
+    <% end %>
+  <% end %>
+<% end %>

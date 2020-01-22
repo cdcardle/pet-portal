@@ -79,6 +79,7 @@ Views
 
   Appointments
     Index
+      Table - links for pets/doctors
     New
     Show
     Edit

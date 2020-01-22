@@ -10,7 +10,7 @@ RSpec.describe Pet, type: :model do
     end
 
     it 'has an animal_type' do
-      expect(pet.animal_type).to eq("dog")
+      expect(pet.animal_type).to eq("Dog")
     end
 
     it 'has a breed' do
@@ -18,7 +18,7 @@ RSpec.describe Pet, type: :model do
     end
 
     it 'has a gender' do
-      expect(pet.gender).to eq("female")
+      expect(pet.gender).to eq("Female")
     end
 
     it 'has a color' do

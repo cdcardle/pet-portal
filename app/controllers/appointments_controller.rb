@@ -1,4 +1,9 @@
 class AppointmentsController < ApplicationController
+
+  def index
+    @appointments = Appointment.all.order(:datetime)
+  end
+
   def new
     @appointment = Appointment.new
   end
