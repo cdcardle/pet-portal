@@ -15,7 +15,7 @@ class PetsController < ApplicationController
     if @pet.save
       redirect_to pet_path(@pet)
     else
-      redirect_back(fallback_location: new_pet_path)
+      redirect_to root_path
     end
   end
 

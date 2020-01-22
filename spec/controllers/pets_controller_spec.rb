@@ -46,15 +46,17 @@ RSpec.describe PetsController, type: :controller do
       expect(response).to redirect_to(pet_path(Pet.last.id))
     end
 
-    it "redirects to new if not admin" do
+    it "redirects to root if not admin" do
       expect{
         post :create, params: {pet: pet_params}
       }.to_not change(Pet, :count)
-      
+      expect(response).to redirect_to(root_path)
+
       sign_in user
       expect{
         post :create, params: {pet: pet_params}
       }.to_not change(Pet, :count)
+      expect(response).to redirect_to(root_path)
     end
   end
 
@@ -84,5 +86,25 @@ RSpec.describe PetsController, type: :controller do
         get :show, params: {id: 1}
       ).to redirect_to(new_user_session_path)
     end
+  end
+
+  describe "#edit" do
+    it "renders if admin" do
+      sign_in admin
+      expect(get :edit, params: {id: 1}).to render_template(:edit)
+    end
+
+    it "redirects back if not admin" do
+      sign_in user
+      expect(
+        get :edit, params: {id: 1, headers: {"HTTP_REFERER" => "http://test.host"}}
+      ).to redirect_to(:back)
+    end
+
+    # it "redirects to sign in if not logged in" do
+    #   expect(
+    #     get :edit, params: {id: 1}
+    #   ).to redirect_to(new_user_session_path)
+    # end
   end
 end
