@@ -127,5 +127,16 @@ RSpec.describe PetsController, type: :controller do
       expect(Pet.find(1).weight).to eq(55)
       expect(response).to redirect_to(pet_path(1))
     end
+
+    it "redirects back if user" do
+      sign_in user
+      post :update, params: {id: 1, pet: {weight: 55}, headers: {"HTTP_REFERER" => "http://test.host"}}
+      expect(response).to redirect_to(root_path)
+    end
+
+    it "redirects to sign in if not logged in" do
+      post :update, params: {id: 1, pet: {weight: 55}}
+      expect(response).to redirect_to(new_user_session_path)
+    end
   end
 end
