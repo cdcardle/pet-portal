@@ -1,6 +1,6 @@
 class PetsController < ApplicationController
-  before_action :is_admin?, only: [:index, :new, :create, :edit, :update, :destroy]
   before_action :authenticate_user!
+  before_action :is_admin?, only: [:index, :new, :create, :edit, :update, :destroy]
 
   def index
     @pets = Pet.all
@@ -22,6 +22,10 @@ class PetsController < ApplicationController
   def show
     @pet = Pet.find(params[:id])
     redirect_back(fallback_location: root_path) if (!current_user.admin? && current_user.id != @pet.user_id)
+  end
+
+  def edit
+    @pet = Pet.find(params[:id])
   end
 
   private

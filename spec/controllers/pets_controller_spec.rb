@@ -12,14 +12,17 @@ RSpec.describe PetsController, type: :controller do
       expect(get :index).to render_template(:index)
     end
 
-    it "redirects back if not admin" do
-      expect(
-        get :new, params: {headers: {"HTTP_REFERER" => "http://test.host"}}
-      ).to redirect_to(root_path)
+    it "redirects back if user" do
       sign_in user
       expect(
-        get :new, params: {headers: {"HTTP_REFERER" => "http://test.host"}}
+        get :index, params: {headers: {"HTTP_REFERER" => "http://test.host"}}
       ).to redirect_to(root_path)
+    end
+
+    it "redirects to sign in if not logged in" do
+      expect(
+        get :index
+      ).to redirect_to(new_user_session_path)
     end
   end
 
@@ -29,10 +32,17 @@ RSpec.describe PetsController, type: :controller do
       expect(get :new).to render_template(:new)
     end
 
-    it "redirects back if not admin" do
+    it "redirects back if user" do
+      sign_in user
       expect(
         get :new, params: {headers: {"HTTP_REFERER" => "http://test.host"}}
       ).to redirect_to(root_path)
+    end
+
+    it "redirects to sign in if not logged in" do
+      expect(
+        get :new, params: {headers: {"HTTP_REFERER" => "http://test.host"}}
+      ).to redirect_to(new_user_session_path)
     end
   end
 
@@ -46,17 +56,19 @@ RSpec.describe PetsController, type: :controller do
       expect(response).to redirect_to(pet_path(Pet.last.id))
     end
 
-    it "redirects to root if not admin" do
-      expect{
-        post :create, params: {pet: pet_params}
-      }.to_not change(Pet, :count)
-      expect(response).to redirect_to(root_path)
-
+    it "redirects back if user" do
       sign_in user
       expect{
-        post :create, params: {pet: pet_params}
+        post :create, params: {pet: pet_params, headers: {"HTTP_REFERER" => "http://test.host"}}
       }.to_not change(Pet, :count)
       expect(response).to redirect_to(root_path)
+    end
+
+    it "redirects to sign in if not logged in" do
+      expect{
+        post :create, params: {pet: pet_params}
+      }.to_not change(Pet, :count)
+      expect(response).to redirect_to(new_user_session_path)
     end
   end
 
@@ -98,13 +110,13 @@ RSpec.describe PetsController, type: :controller do
       sign_in user
       expect(
         get :edit, params: {id: 1, headers: {"HTTP_REFERER" => "http://test.host"}}
-      ).to redirect_to(:back)
+      ).to redirect_to(root_path)
     end
 
-    # it "redirects to sign in if not logged in" do
-    #   expect(
-    #     get :edit, params: {id: 1}
-    #   ).to redirect_to(new_user_session_path)
-    # end
+    it "redirects to sign in if not logged in" do
+      expect(
+        get :edit, params: {id: 1}
+      ).to redirect_to(new_user_session_path)
+    end
   end
 end
