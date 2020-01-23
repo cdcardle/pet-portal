@@ -8,37 +8,13 @@ RSpec.describe UsersController, type: :controller do
 
   describe "#index" do
     include_examples "renders if admin", :index
-
-    it "renders index view if logged in as admin" do
-      sign_in admin
-      get :index
-      expect(response).to render_template(:index)
-    end
-
-    it "redirects back if owner" do
-      sign_in user
-      get :index, params: {headers: {"HTTP_REFERER" => "http://test.host"}}
-      expect(response).to redirect_to(root_path)
-    end
-
-    it "redirects back if NOT logged in as admin" do
-      get :index
-      expect(response).to redirect_to(new_user_session_path)
-    end
+    include_examples "redirects back if user", :index
+    include_examples "redirects to sign in if not logged in", :index
   end
 
   describe "#new" do
-    it "renders new view if logged in as admin" do
-      sign_in admin
-      get :new
-      expect(response).to render_template(:new)
-    end
-
-    it "redirects to show page if logged in as owner" do
-      sign_in user
-      get :new
-      expect(response).to redirect_to(user_path(user.id))
-    end
+    include_examples "renders if admin", :new
+    include_examples "redirects back if user", :new
 
     it "renders new view if not logged in" do
       get :new
@@ -75,11 +51,7 @@ RSpec.describe UsersController, type: :controller do
 
   describe "#show" do
     describe "own show page" do
-      it "renders if logged in as admin" do
-        sign_in admin
-        get :show, params: {id: admin.id}
-        expect(response).to render_template(:show)
-      end
+      include_examples "renders if admin", :show, {id: 2}
 
       it "renders if logged in as owner" do
         sign_in user
@@ -89,22 +61,12 @@ RSpec.describe UsersController, type: :controller do
     end
 
     describe "others' show page" do
-      it "renders if logged in as admin" do
-        sign_in admin
-        get :show, params: {id: user.id}
-        expect(response).to render_template(:show)
-      end
+      include_examples "renders if admin", :show, {id: 3}
 
-      it "redirects to own show page if logged in as owner" do
-        sign_in user
-        get :show, params: {id: 1}
-        expect(response).to redirect_to(user_path(user.id))
-      end
+      include_examples "redirects back if user", :show, {id: 2}
 
-      it "redirects to sign in if not logged in" do
-        get :show, params: {id: 1}
-        expect(response).to redirect_to(new_user_session_path)
-      end
+
+      include_examples "redirects to sign in if not logged in", :show, {id: 3}
     end
   end
 
