@@ -1,5 +1,9 @@
-<%= form_with model: @appointment do |f| %>
-  <%= f.datetime_field :datetime %>
+<h1>New Appointment</h1>
+
+<%= simple_form_for @appointment do |f| %>
+  <%= f.input :datetime, required: false %>
+  <%= f.input :pet_id, as: :select, collection: Pet.all %>
+  <%= f.input :doctor_id, as: :select, collection: Doctor.all %>
 
   <%= f.submit %>
 <% end %>

@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe AppointmentsController, type: :controller do
 
   include_examples "create models"
+  let(:appointment_params) {{ datetime: "2020-01-23T09:30:00", pet_id: 1, doctor_id: 1 }}
 
   describe "#index" do
     include_examples "renders if admin", :index
@@ -17,6 +18,28 @@ RSpec.describe AppointmentsController, type: :controller do
   end
 
   describe "#create" do
-    
+    it "creates a new appointment and redirects to its show page if admin" do
+      sign_in admin
+      expect{
+        post :create, params: {appointment: appointment_params}
+      }.to change(Appointment, :count).by(1)
+      expect(Appointment.last.date).to eq("2020-01-23")
+      expect(response).to redirect_to(appointment_path(Appointment.last.id))
+    end
+
+    it "does not create appointment and redirects back if user" do
+      sign_in user
+      expect{
+        post :create, params: {appointment: appointment_params}
+      }.to_not change(Appointment, :count)
+      expect(response).to redirect_to(root_path)
+    end
+
+    it "does not create appointment and redirects to sign in if not logged in" do
+      expect{
+        post :create, params: {appointment: appointment_params}
+      }.to_not change(Appointment, :count)
+      expect(response).to redirect_to(new_user_session_path)
+    end
   end
 end

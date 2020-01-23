@@ -11,12 +11,11 @@ class AppointmentsController < ApplicationController
   end
 
   def create
-    binding.pry
     appointment = Appointment.new(appointment_params)
     if appointment.save
       redirect_to appointment
     else
-      render :new
+      render :new, alert: "Appointment not created."
     end
   end
 
@@ -27,6 +26,6 @@ class AppointmentsController < ApplicationController
   private
 
     def appointment_params
-      params.require(:appointment).permit(:datetime)
+      params.require(:appointment).permit(:datetime, :pet_id, :doctor_id)
     end
 end

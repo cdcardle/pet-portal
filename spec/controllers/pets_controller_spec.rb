@@ -19,7 +19,7 @@ RSpec.describe PetsController, type: :controller do
   end
 
   describe "#create" do
-    it "creates a new pet and redirects to their show page if admin" do
+    it "creates a new pet and redirects to its show page if admin" do
       sign_in admin
       expect{
         post :create, params: {pet: pet_params}
