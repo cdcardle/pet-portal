@@ -72,12 +72,8 @@ RSpec.describe UsersController, type: :controller do
 
   describe "#edit" do
     describe "own edit page" do
-      it "renders if logged in as admin" do
-        sign_in admin
-        get :edit, params: {id: admin.id}
-        expect(response).to render_template(:edit)
-      end
-
+      include_examples "renders if admin", :edit, {id: 2}
+      
       it "renders if logged in as owner" do
         sign_in user
         get :edit, params: {id: user.id}
@@ -86,22 +82,11 @@ RSpec.describe UsersController, type: :controller do
     end
     
     describe "others' edit page" do
-      it "renders if logged in as admin" do
-        sign_in admin
-        get :edit, params: {id: user.id}
-        expect(response).to render_template(:edit)
-      end
+      include_examples "renders if admin", :edit, {id: 3}
 
-      it "redirects to own show page if logged in as owner" do
-        sign_in user
-        get :edit, params: {id: 1}
-        expect(response).to redirect_to(user_path(user.id))
-      end
+      include_examples "redirects back if user", :edit, {id: 1}
 
-      it "redirects to sign in if not logged in" do
-        get :edit, params: {id: 1}
-        expect(response).to redirect_to(new_user_session_path)
-      end
+      include_examples "redirects to sign in if not logged in", :edit, {id: 3}
     end
   end
 
