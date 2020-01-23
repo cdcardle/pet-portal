@@ -1,4 +1,6 @@
 class AppointmentsController < ApplicationController
+  before_action :authenticate_user!
+  before_action :is_admin?, only: [:index, :new, :create, :edit, :update, :destroy]
 
   def index
     @appointments = Appointment.all.order(:datetime)
