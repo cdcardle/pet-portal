@@ -7,6 +7,8 @@ RSpec.describe UsersController, type: :controller do
   let(:admin_params) {{email: "_example@yahoo.com", password: "bobpassword", first_name: "Bob", last_name: "Johnson", first_street_address: "1234 Example Rd.", second_street_address: "Apt 202", city: "Exampletown", state: "Example", zipcode: 12345, role: "1"}}
 
   describe "#index" do
+    include_examples "renders if admin", :index
+
     it "renders index view if logged in as admin" do
       sign_in admin
       get :index
