@@ -89,26 +89,27 @@ RSpec.shared_examples "create models" do
   end
 end
 
-RSpec.shared_examples "renders if admin" do |parameter|
+RSpec.shared_examples "renders if admin" do |action, parameters|
   it "renders if admin" do
     sign_in admin
-    expect(get parameter).to render_template(parameter)
+    expect(
+      get action, params: parameters
+    ).to render_template(action)
   end
 end
 
-RSpec.shared_examples "redirects back if user" do |parameter|
+RSpec.shared_examples "redirects back if user" do |action, parameters|
   it "redirects back if user" do
     sign_in user
-    expect(
-      get parameter, params: {headers: {"HTTP_REFERER" => "http://test.host"}}
-    ).to redirect_to(root_path)
+    get action, params: parameters
+    expect(response).to redirect_to(root_path)
   end
 end
 
-RSpec.shared_examples "redirects to sign in if not logged in" do |parameter|
+RSpec.shared_examples "redirects to sign in if not logged in" do |action, parameters|
   it "redirects to sign in if not logged in" do
     expect(
-      get parameter
+      get action, params: parameters
     ).to redirect_to(new_user_session_path)
   end
 end
