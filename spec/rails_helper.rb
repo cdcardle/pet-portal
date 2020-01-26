@@ -69,6 +69,7 @@ end
 RSpec.shared_examples "create models" do
   let(:admin) { build(:admin) }
   let(:user) { build(:user) }
+  let(:different_user) { build(:different_user) }
   let(:pet) { build(:pet) }
   let(:appointment) { build(:appointment) }
   let(:invoice) { build(:invoice) }
@@ -86,6 +87,8 @@ RSpec.shared_examples "create models" do
 
     invoice.appointment = appointment
     invoice.save
+
+    different_user.save
   end
 end
 

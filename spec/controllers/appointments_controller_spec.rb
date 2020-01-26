@@ -42,4 +42,23 @@ RSpec.describe AppointmentsController, type: :controller do
       expect(response).to redirect_to(new_user_session_path)
     end
   end
+
+  describe "#show" do
+    include_examples "renders if admin", :show, { id: 1 }
+
+    it "renders if it is their appointment as user" do
+      sign_in user
+      expect(
+        get :show, params: {id: 1}
+      ).to render_template(:show)
+    end
+
+    it "redirects back if it is not their appointment as user" do
+      sign_in different_user
+      get :show, params: {id: 1}
+      expect(response).to redirect_to(root_path)
+    end
+
+    include_examples "redirects to sign in if not logged in", :show, { id: 1 }
+  end
 end

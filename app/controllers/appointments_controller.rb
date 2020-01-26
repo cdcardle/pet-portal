@@ -21,6 +21,9 @@ class AppointmentsController < ApplicationController
 
   def show
     @appointment = Appointment.find(params[:id])
+    if current_user != @appointment.pet.owner && !current_user.admin?
+       redirect_back(fallback_location: root_path)
+    end
   end
 
   private
