@@ -54,6 +54,11 @@ Controllers
     Edit - admin
     Destroy - admin
   Doctors
+    Index - admin
+    New - admin
+    Show - admin
+    Edit - admin
+    Destroy - admin
   Invoices
 
 Views
@@ -80,6 +85,12 @@ Views
   Appointments
     Index
       Table - links for pets/doctors
+    New
+    Show
+    Edit
+
+  Doctors
+    Index
     New
     Show
     Edit
