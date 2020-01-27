@@ -1,0 +1,9 @@
+<%= tag.h1 @doctor.name %>
+
+<% @doctor.appointments.each do |appointment| %>
+  <%= tag.p do %>
+    <%= "Date: #{appointment.date}" %><br>
+    <%= "Time: #{appointment.time}" %><br>
+    <%= "Pet: #{appointment.pet.name}" %><br>
+  <% end %>
+<% end %>

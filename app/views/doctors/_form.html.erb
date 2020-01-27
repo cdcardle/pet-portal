@@ -1,0 +1,6 @@
+<%= simple_form_for doctor do |f| %>
+  <%= f.input :first_name, required: false, placeholder: doctor.first_name %>
+  <%= f.input :last_name, placeholder: doctor.last_name %>
+
+  <%= f.submit %>
+<% end %>
