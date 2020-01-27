@@ -20,34 +20,34 @@ class InvoicesController < ApplicationController
   end
 
   def show
-    @invoice = invoice_params
+    @invoice = find_invoice
     if current_user != @invoice.pet.owner && !current_user.admin?
        redirect_back(fallback_location: root_path)
     end
   end
 
   def edit
-    @invoice = invoice_params
+    @invoice = find_invoice
   end
 
   def update
-    @invoice = invoice_params
+    @invoice = find_invoice
     @invoice.update(invoice_params)
     redirect_to invoice_path(@invoice)
   end
 
   def destroy
-    invoice_params.delete
+    find_invoice.delete
     redirect_to invoices_path, notice: "invoice deleted."
   end
 
   private
 
     def invoice_params
-      params.require(:invoice).permit(:datetime, :pet_id, :doctor_id)
+      params.require(:invoice).permit(:cents, :appointment_id)
     end
 
-    def invoice_params
+    def find_invoice
       Invoice.find(params[:id])
     end
 end

@@ -8,7 +8,7 @@ class Invoice < ApplicationRecord
   end
   
   def total
-    cents / 100.00
+    "$#{cents / 100.00}"
   end
 
   def date

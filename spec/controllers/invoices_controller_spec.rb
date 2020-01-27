@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.describe InvoicesController, type: :controller do
   include_examples "create models"
-  let(:invoice_params) {{ cents: 17689, appointment_id: 2 }}
   let(:different_appointment) { create(:different_appointment) }
+  let(:invoice_params) {{ cents: 17689, appointment_id: 2 }}
 
   describe "#index" do
     include_examples "renders if admin", :index
@@ -22,23 +22,23 @@ RSpec.describe InvoicesController, type: :controller do
       sign_in admin
       expect{
         post :create, params: {invoice: invoice_params}
-      }.to change(invoice, :count).by(1)
-      expect(invoice.last.date).to eq("2020-01-23")
-      expect(response).to redirect_to(invoice_path(invoice.last.id))
+      }.to change(Invoice, :count).by(1)
+      expect(Invoice.last.cents).to eq("17689")
+      expect(response).to redirect_to(invoice_path(Invoice.last.id))
     end
 
     it "does not create invoice and redirects back if user" do
       sign_in user
       expect{
         post :create, params: {invoice: invoice_params}
-      }.to_not change(invoice, :count)
+      }.to_not change(Invoice, :count)
       expect(response).to redirect_to(root_path)
     end
 
     it "does not create invoice and redirects to sign in if not logged in" do
       expect{
         post :create, params: {invoice: invoice_params}
-      }.to_not change(invoice, :count)
+      }.to_not change(Invoice, :count)
       expect(response).to redirect_to(new_user_session_path)
     end
   end
@@ -71,14 +71,21 @@ RSpec.describe InvoicesController, type: :controller do
   describe "#update" do
     it "updates the invoice and redirects to its show page if admin" do
       sign_in admin
-      post :update, params: {id: 1, invoice: {datetime: "2020-01-09T11:30:00"}}
-      expect(invoice.find(1).date).to eq("2020-01-09")
-      expect(invoice.find(1).time).to eq("11:30am")
+      post :update, params: {id: 1, invoice: {cents: 21255}}
+      expect(Invoice.find(1).total).to eq("$212.55")
       expect(response).to redirect_to(invoice_path(1))
     end
 
-    include_examples "redirects back if user", :update, {id: 1, invoice: {datetime: "2020-01-09T11:30:00"}}
-    include_examples "redirects to sign in if not logged in", :update, {id: 1, invoice: {datetime: "2020-01-09T11:30:00"}}
+    it "redirects back if user" do
+      sign_in user
+      post :update, params: {id: 1, invoice: {cents: 21255}}
+      expect(response).to redirect_to(root_path)
+    end
+
+    it "redirects to sign in if not logged in" do
+      post :update, params: {id: 1, invoice: {cents: 21255}}
+      expect(response).to redirect_to(new_user_session_path)
+    end
   end
 
   describe "#destroy" do
@@ -86,22 +93,22 @@ RSpec.describe InvoicesController, type: :controller do
       sign_in admin
       post :create, params: {invoice: invoice_params}
       expect {
-        delete :destroy, params: {id: invoice.last.id}
-      }.to change(invoice, :count).by(-1)
+        delete :destroy, params: {id: Invoice.last.id}
+      }.to change(Invoice, :count).by(-1)
       expect(response).to redirect_to(invoices_path)
     end
 
     it "does nothing if user" do
       sign_in user
       expect {
-        delete :destroy, params: {id: invoice.last.id}
-      }.to_not change(invoice, :count)
+        delete :destroy, params: {id: Invoice.last.id}
+      }.to_not change(Invoice, :count)
     end
 
     it "does nothing if not logged in" do
       expect {
-        delete :destroy, params: {id: invoice.last.id}
-      }.to_not change(invoice, :count)
+        delete :destroy, params: {id: Invoice.last.id}
+      }.to_not change(Invoice, :count)
     end
   end
 end
