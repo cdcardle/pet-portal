@@ -5,7 +5,7 @@ RSpec.describe Invoice, type: :model do
 
   describe "Model" do
     it "has a total" do
-      expect(invoice.total).to eq(137.19)
+      expect(invoice.total).to eq("$137.19")
     end
   end
 
