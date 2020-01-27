@@ -1,0 +1,7 @@
+<%= simple_form_for appointment do |f| %>
+  <%= f.input :datetime, required: false, placeholder: appointment.datetime %>
+  <%= f.input :pet_id, as: :select, collection: Pet.all, placeholder: appointment.pet %>
+  <%= f.input :doctor_id, as: :select, collection: Doctor.all, placeholder: appointment.doctor %>
+
+  <%= f.submit %>
+<% end %>

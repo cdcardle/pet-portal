@@ -61,4 +61,10 @@ RSpec.describe AppointmentsController, type: :controller do
 
     include_examples "redirects to sign in if not logged in", :show, { id: 1 }
   end
+
+  describe "edit" do
+    include_examples "renders if admin", :edit, {id: 1}
+    include_examples "redirects back if user", :edit, {id: 1}
+    include_examples "redirects to sign in if not logged in", :edit, {id: 1}
+  end
 end
