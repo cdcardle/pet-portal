@@ -5,7 +5,7 @@ FactoryBot.define do
     doctor_id { 1 }
   end
 
-  factory :different_appointment do
+  factory :different_appointment, class: "Appointment" do
     datetime { "2020-02-06T10:00:00" }
     pet_id { 1 }
     doctor_id { 1 }

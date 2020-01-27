@@ -1,0 +1,6 @@
+<%= simple_form_for invoice do |f| %>
+  <%= f.input :cents, required: false, placeholder: invoice.cents %>
+  <%= f.input :appointment_id, as: :select, collection: Appointment.all, placeholder: invoice.appointment %>
+
+  <%= f.submit %>
+<% end %>

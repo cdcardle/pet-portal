@@ -1,0 +1,8 @@
+<%= tag.h1 "List of Invoices" %>
+
+<% @invoices.each do |invoice| %>
+  <%= tag.p do %>
+    <%= invoice.pet.name %><br>
+    <%= invoice.total %>
+  <% end %>
+<% end %>

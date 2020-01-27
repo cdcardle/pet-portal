@@ -20,10 +20,10 @@ RSpec.describe InvoicesController, type: :controller do
   describe "#create" do
     it "creates a new invoice and redirects to its show page if admin" do
       sign_in admin
-      expect{
-        post :create, params: {invoice: invoice_params}
-      }.to change(Invoice, :count).by(1)
-      expect(Invoice.last.cents).to eq("17689")
+      post :create, params: {invoice: invoice_params}
+      binding.pry
+      expect(response).to change(Invoice, :count).by(1)
+      expect(Invoice.last.cents).to eq(17689)
       expect(response).to redirect_to(invoice_path(Invoice.last.id))
     end
 
