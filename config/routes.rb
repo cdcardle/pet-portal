@@ -9,4 +9,5 @@ Rails.application.routes.draw do
   resources :pets
   resources :appointments
   resources :doctors
+  resources :invoices
 end
