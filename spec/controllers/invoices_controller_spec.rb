@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.describe InvoicesController, type: :controller do
   include_examples "create models"
-  let(:different_appointment) { create(:different_appointment) }
   let(:invoice_params) {{ cents: 17689, appointment_id: 2 }}
+  let(:appointment_params) {{ datetime: "2020-01-23T09:30:00", pet_id: 1, doctor_id: 1 }}
 
   describe "#index" do
     include_examples "renders if admin", :index
@@ -20,9 +20,10 @@ RSpec.describe InvoicesController, type: :controller do
   describe "#create" do
     it "creates a new invoice and redirects to its show page if admin" do
       sign_in admin
-      post :create, params: {invoice: invoice_params}
-      binding.pry
-      expect(response).to change(Invoice, :count).by(1)
+      Appointment.create(appointment_params)
+      expect{
+        post :create, params: {invoice: invoice_params}
+      }.to change(Invoice, :count).by(1)
       expect(Invoice.last.cents).to eq(17689)
       expect(response).to redirect_to(invoice_path(Invoice.last.id))
     end
