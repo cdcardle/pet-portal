@@ -60,6 +60,11 @@ Controllers
     Edit - admin
     Destroy - admin
   Invoices
+    Index - admin
+    New - admin
+    Show - user (theirs), admin (all)
+    Edit - admin
+    Destroy - admin
 
 Views
   Layout
@@ -69,27 +74,28 @@ Views
       Visitor
     Yield
     Footer
-
   Users
     Index
     New
     Show
     Edit
-
   Pets
     Index
     New
     Show
     Edit
-
   Appointments
     Index
       Table - links for pets/doctors
     New
     Show
     Edit
-
   Doctors
+    Index
+    New
+    Show
+    Edit
+  Invoices
     Index
     New
     Show
