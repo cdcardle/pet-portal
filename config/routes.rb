@@ -8,4 +8,5 @@ Rails.application.routes.draw do
   resources :users
   resources :pets
   resources :appointments
+  resources :doctors
 end
