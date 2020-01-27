@@ -72,7 +72,8 @@ RSpec.describe AppointmentsController, type: :controller do
     it "updates the appointment and redirects to its show page if admin" do
       sign_in admin
       post :update, params: {id: 1, appointment: {datetime: "2020-01-09T11:30:00"}}
-      expect(Appointment.find(1).date).to eq("1-9-2020")
+      expect(Appointment.find(1).date).to eq("2020-01-09")
+      expect(Appointment.find(1).time).to eq("11:30am")
       expect(response).to redirect_to(appointment_path(1))
     end
 
