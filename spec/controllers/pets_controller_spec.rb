@@ -79,16 +79,8 @@ RSpec.describe PetsController, type: :controller do
       expect(response).to redirect_to(pet_path(1))
     end
 
-    it "redirects back if user" do
-      sign_in user
-      post :update, params: {id: 1, pet: {weight: 55}, headers: {"HTTP_REFERER" => "http://test.host"}}
-      expect(response).to redirect_to(root_path)
-    end
-
-    it "redirects to sign in if not logged in" do
-      post :update, params: {id: 1, pet: {weight: 55}}
-      expect(response).to redirect_to(new_user_session_path)
-    end
+    include_examples "redirects back if user", :edit, {id: 1, pet: {weight: 55}}
+    include_examples "redirects to sign in if not logged in", :edit, {id: 1, pet: {weight: 55}}
   end
 
   describe "#destroy" do
