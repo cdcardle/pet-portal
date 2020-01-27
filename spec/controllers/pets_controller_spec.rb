@@ -72,7 +72,7 @@ RSpec.describe PetsController, type: :controller do
   end
 
   describe "#update" do
-    it "updates the pet and redirects to their show page if admin" do
+    it "updates the pet and redirects to its show page if admin" do
       sign_in admin
       post :update, params: {id: 1, pet: {weight: 55}}
       expect(Pet.find(1).weight).to eq(55)

@@ -67,4 +67,16 @@ RSpec.describe AppointmentsController, type: :controller do
     include_examples "redirects back if user", :edit, {id: 1}
     include_examples "redirects to sign in if not logged in", :edit, {id: 1}
   end
+
+  describe "update" do
+    it "updates the appointment and redirects to its show page if admin" do
+      sign_in admin
+      post :update, params: {id: 1, appointment: {datetime: "2020-01-09T11:30:00"}}
+      expect(Appointment.find(1).date).to eq("1-9-2020")
+      expect(response).to redirect_to(appointment_path(1))
+    end
+
+    include_examples "redirects back if user", :update, {id: 1, appointment: {datetime: "2020-01-09T11:30:00"}}
+    include_examples "redirects to sign in if not logged in", :update, {id: 1, appointment: {datetime: "2020-01-09T11:30:00"}}
+  end
 end
