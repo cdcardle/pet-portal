@@ -16,8 +16,9 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
-    <div class="container">
+  <body class="row">
+    <div class="col page-left"></div>
+    <div class="col-8 page-middle">
       <% if user_signed_in? %>
         <%= render 'layouts/admin_navbar' if current_user.admin? %>
         <%= render 'layouts/owner_navbar' if current_user.owner? %>
@@ -27,5 +28,6 @@
       <%= render 'layouts/messages' %>
       <%= yield %>
     </div>
+    <div class="col page-right"></div>
   </body>
 </html>

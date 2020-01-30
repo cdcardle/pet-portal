@@ -1,15 +1,17 @@
 <h1>Welcome, Admin!</h1>
 
-<div class="admins-list">
-  <%= tag.h2 "Admins" %>
-  <% @admins.each do |admin| %>
-    <%= tag.p admin.name %>
+<%= tag.div class: "row" do %>
+  <%= tag.div class: "admins-list col" do %>
+    <%= tag.h2 "Admins" %>
+    <% @admins.each do |admin| %>
+      <%= tag.p admin.name %>
+    <% end %>
   <% end %>
-</div>
 
-<div class="users-list">
-  <%= tag.h2 "Users" %>
-  <% @users.each do |user| %>
-    <%= tag.p user.name %>
+  <%= tag.div class: "users-list col" do %>
+    <%= tag.h2 "Users" %>
+    <% @users.each do |user| %>
+      <%= tag.p user.name %>
+    <% end %>
   <% end %>
-</div>
+<% end %>
