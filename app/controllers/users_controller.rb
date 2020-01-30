@@ -3,7 +3,8 @@ class UsersController < ApplicationController
   before_action :is_admin?, only: [:index, :destroy]
 
   def index
-    @users = User.all
+    @admins = User.all.find_all{|e| e.admin?}
+    @users = User.all - @admins
   end
 
   def new

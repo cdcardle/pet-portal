@@ -1,5 +1,15 @@
 <h1>Welcome, Admin!</h1>
 
-<% @users.all.each do |user| %>
-  <%= tag.p (user.name if user.role == "owner") %>
-<% end %>
+<div class="admins-list">
+  <%= tag.h2 "Admins" %>
+  <% @admins.each do |admin| %>
+    <%= tag.p admin.name %>
+  <% end %>
+</div>
+
+<div class="users-list">
+  <%= tag.h2 "Users" %>
+  <% @users.each do |user| %>
+    <%= tag.p user.name %>
+  <% end %>
+</div>

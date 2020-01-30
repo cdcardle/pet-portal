@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe UsersController, type: :controller do
+  render_views
 
   include_examples "create models"
   let(:user_params) {{email: "sam_example@yahoo.com", password: "sampassword", first_name: "Sam", last_name: "Johnson", first_street_address: "1010 Example Rd.", second_street_address: "Apt 110", city: "Exampletown", state: "Example", zipcode: 12345, role: "0"}}
@@ -10,6 +11,12 @@ RSpec.describe UsersController, type: :controller do
     include_examples "renders if admin", :index
     include_examples "redirects back if user", :index
     include_examples "redirects to sign in if not logged in", :index
+
+    it "when rendered, shows a list of all admins and a list of all owners" do
+      sign_in admin
+      get :index
+      expect(response.body).to include("Users", "Admin", User.first.name)
+    end
   end
 
   describe "#new" do
