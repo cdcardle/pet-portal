@@ -76,9 +76,13 @@ Views
     Footer
   Users
     Index
+      List of each user with links to show/edit/delete
     New
+      Form to create a new user
     Show
+      Information for the user (pets, appointments, invoices)
     Edit
+      Pre-filled form to edit user
   Pets
     Index
     New
