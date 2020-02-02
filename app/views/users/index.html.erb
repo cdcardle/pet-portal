@@ -1,15 +1,16 @@
 <h1>Welcome, Admin!</h1>
 
-<div class="row">
+<div class="d-flex justify-content-around red-links">
   <div class="users-list col-8">
     <%= tag.h2 "Users" %>
     <table>
-      <tr>
-        <%= tag.th "Name" %>
-      </tr>
+      <%= tag.tr(tag.th("Name")) %>
+
       <% @users.each do |user| %>
         <%= tag.tr class: "row" do %>
-          <th><%= link_to user.name, user_path(user) %></th>
+          <%= tag.th do %>
+            <%= link_to user.name, user_path(user) %></th>
+          <% end %>
           <%= tag.th class: "half-size" do %>
             <%= link_to "Edit", edit_user_path(user) %>
           <% end %>

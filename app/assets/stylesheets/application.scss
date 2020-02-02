@@ -2,6 +2,10 @@
 
 @import "bootstrap";
 
+html, body {
+  min-height: 100vh;
+}
+
 .page-left {
   background-color: blue;
 }
@@ -16,4 +20,12 @@
 
 .half-size {
   font-size: 0.75em;
+}
+
+.red-links a {
+  color: red;
+}
+
+.red-links a:hover {
+  color: yellow;
 }
