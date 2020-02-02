@@ -5,7 +5,7 @@ RSpec.describe UsersController, type: :controller do
 
   include_examples "create models"
   let(:user_params) {{email: "sam_example@yahoo.com", password: "sampassword", first_name: "Sam", last_name: "Johnson", first_street_address: "1010 Example Rd.", second_street_address: "Apt 110", city: "Exampletown", state: "Example", zipcode: 12345, role: "0"}}
-  let(:admin_params) {{email: "_example@yahoo.com", password: "bobpassword", first_name: "Bob", last_name: "Johnson", first_street_address: "1234 Example Rd.", second_street_address: "Apt 202", city: "Exampletown", state: "Example", zipcode: 12345, role: "1"}}
+  let(:admin_params) {{email: "steve_example@yahoo.com", password: "stevepassword", first_name: "Steve", last_name: "Johnson", first_street_address: "1234 Example Rd.", second_street_address: "Apt 202", city: "Exampletown", state: "Example", zipcode: 12345, role: "1"}}
 
   describe "#index" do
     include_examples "renders if admin", :index

@@ -1,17 +1,30 @@
 <h1>Welcome, Admin!</h1>
 
-<%= tag.div class: "row" do %>
+<div class="row">
+  <div class="users-list col-8">
+    <%= tag.h2 "Users" %>
+    <table>
+      <tr>
+        <%= tag.th "Name" %>
+      </tr>
+      <% @users.each do |user| %>
+        <%= tag.tr class: "row" do %>
+          <th><%= link_to user.name, user_path(user) %></th>
+          <%= tag.th class: "half-size" do %>
+            <%= link_to "Edit", edit_user_path(user) %>
+          <% end %>
+          <%= tag.th class: "half-size" do %>
+            <%= link_to "Delete", users_path, method: :delete %>
+          <% end %>
+        <% end %>
+      <% end %>
+    </table>
+  </div>
+
   <%= tag.div class: "admins-list col" do %>
     <%= tag.h2 "Admins" %>
     <% @admins.each do |admin| %>
       <%= tag.p admin.name %>
     <% end %>
   <% end %>
-
-  <%= tag.div class: "users-list col" do %>
-    <%= tag.h2 "Users" %>
-    <% @users.each do |user| %>
-      <%= tag.p user.name %>
-    <% end %>
-  <% end %>
-<% end %>
+</div>
