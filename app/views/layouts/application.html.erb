@@ -16,20 +16,27 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body class="row no-gutters">
-    <div class="col page-left"></div>
-    <div class="col-8 page-middle">
+  <body>
+    <header>
       <% if user_signed_in? %>
         <%= render 'layouts/admin_navbar' if current_user.admin? %>
         <%= render 'layouts/owner_navbar' if current_user.owner? %>
       <% else %>
         <%= render 'layouts/visitor_navbar' %>
       <% end %>
-      <div class="container">
-        <%= render 'layouts/messages' %>
-        <%= yield %>
+    </header>
+    <div class="row no-gutters">
+      <div class="col"></div>
+      <div class="col-8 page-middle">
+        <div class="container">
+          <%= render 'layouts/messages' %>
+          <%= yield %>
+        </div>
       </div>
+      <div class="col"></div>
     </div>
-    <div class="col page-right"></div>
+    <footer class="mh-100">
+      Footer
+    </footer>
   </body>
 </html>

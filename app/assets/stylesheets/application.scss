@@ -6,6 +6,20 @@ html, body {
   min-height: 100vh;
 }
 
+td a {
+  display: block;
+}
+
+footer {
+  text-align: center;
+  width: 100%;
+}
+
+.navbar {
+  width: 100%;
+  margin: 0px 10px 0px 10px;
+}
+
 .page-left {
   background-color: blue;
 }

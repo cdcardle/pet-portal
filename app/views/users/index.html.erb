@@ -3,20 +3,17 @@
 <div class="d-flex justify-content-around red-links">
   <div class="users-list col-8">
     <%= tag.h2 "Users" %>
-    <table>
-      <%= tag.tr(tag.th("Name")) %>
-
+    <table width="80%">
       <% @users.each do |user| %>
         <%= tag.tr class: "row" do %>
-          <%= tag.th do %>
-            <%= link_to user.name, user_path(user) %></th>
-          <% end %>
-          <%= tag.th class: "half-size" do %>
-            <%= link_to "Edit", edit_user_path(user) %>
-          <% end %>
-          <%= tag.th class: "half-size" do %>
-            <%= link_to "Delete", users_path, method: :delete %>
-          <% end %>
+          <div class="row">
+            <%= tag.td width: "30%" do %>
+              <%= link_to user.name, user_path(user) %>
+            <% end %>
+            <%= tag.td width: "50%" do %>
+              <%= link_to user.email, user_path(user) %>
+            <% end %>
+          </div>
         <% end %>
       <% end %>
     </table>
