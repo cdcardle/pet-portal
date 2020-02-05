@@ -17,26 +17,36 @@
   </head>
 
   <body>
-    <header>
-      <% if user_signed_in? %>
-        <%= render 'layouts/admin_navbar' if current_user.admin? %>
-        <%= render 'layouts/owner_navbar' if current_user.owner? %>
-      <% else %>
-        <%= render 'layouts/visitor_navbar' %>
-      <% end %>
-    </header>
-    <div class="row no-gutters">
-      <div class="col"></div>
-      <div class="col-8 page-middle">
-        <div class="container">
-          <%= render 'layouts/messages' %>
-          <%= yield %>
+    <div id="page-container">
+      <header id="header">
+        <nav class="navbar fixed-top navbar-light">
+          <%= link_to "Pet Portal", root_path, class: "navbar-brand" %>
+          <% if user_signed_in? %>
+            <%= render 'layouts/admin_navbar' if current_user.admin? %>
+            <%= render 'layouts/owner_navbar' if current_user.owner? %>
+          <% else %>
+            <%= render 'layouts/visitor_navbar' %>
+          <% end %>
+        </nav>
+      </header>
+      <div id="main" class="container row no-gutters">
+        <div class="col-3">
+          <div id="left-column">
+            Left column lorem ipsum blah blah fill this sentence so it has at least two lines visible.
+          </div>
+        </div>
+        <div id="right-column" class="col-9">
+          <div class="container">
+            <div id="yield">
+              <%= render 'layouts/messages' %>
+              <%= yield %>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="col"></div>
+      <footer id="footer">
+        Copyright &#169; 2020 Chris Cardle
+      </footer>
     </div>
-    <footer class="mh-100">
-      Footer
-    </footer>
   </body>
 </html>
