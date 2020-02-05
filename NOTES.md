@@ -66,6 +66,8 @@ Controllers
     Edit - admin
     Destroy - admin
 
+<!-- Update navbar and left column for links -->
+
 Views
   Layout
     Navbar
