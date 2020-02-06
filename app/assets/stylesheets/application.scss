@@ -17,7 +17,7 @@ html{
 body {
   min-height: 100%;
   padding-top: 56px;
-  background-color: lightblue;
+  background-color: #e6f2ff;
 }
 
 td a {
@@ -27,7 +27,6 @@ td a {
 #page-container {
   height: 100%;
   padding-top: 20px;
-  background-color: yellow;
 }
 
 #main {
@@ -48,19 +47,30 @@ td a {
   height: 1.5rem;
 }
 
-#left-column {
+#middle-column {
+  font-size: 1.5em;
   border-right: 3px double gray;
-  padding: 30px 0px 0px 0px;
+  border-left: 3px double gray;
+  padding: 30px 0px 0px 20%;
+}
+
+#middle-column .btn:hover {
+  color: #e6f2ff;
+  background-color: black;
 }
 
 #right-column {
-  padding: 50px 0px 0px 0px;
+  padding: 50px 0px 0px 10%;
   height: 100%;
 }
 
 .navbar {
   background-color: lightgray;
   width: 100%;
+}
+
+.me-button {
+  border-radius: 50%;
 }
 
 .half-size {
