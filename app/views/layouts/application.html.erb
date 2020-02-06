@@ -32,7 +32,12 @@
       <div id="main" class="container row no-gutters">
         <div class="col-3">
           <div id="left-column">
-            <%= render 'layouts/left_navbar' %>
+            <% if user_signed_in? %>
+              <%= render 'layouts/admin_left_column' if current_user.admin? %>
+              <%= render 'layouts/owner_left_column' if current_user.owner? %>
+            <% else %>
+              <%= render 'layouts/visitor_left_column' %>
+            <% end %>
           </div>
         </div>
         <div id="right-column" class="col-9">
