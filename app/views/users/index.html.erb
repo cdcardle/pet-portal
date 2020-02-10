@@ -1,8 +1,6 @@
-<br>
-
 <div class="d-flex justify-content-around red-links">
   <div class="users-list col-8">
-    <%= tag.h2 "Users" %>
+    <%= tag.h1 "Users" %>
     <table width="80%">
       <% @users.each do |user| %>
         <%= tag.tr class: "row" do %>
@@ -20,10 +18,9 @@
   </div>
 
   <%= tag.div class: "admins-list col" do %>
-    <%= tag.h2 "Admins" %>
+    <%= tag.h1 "Admins" %>
     <% @admins.each do |admin| %>
       <%= tag.p admin.name %>
     <% end %>
   <% end %>
 </div>
-

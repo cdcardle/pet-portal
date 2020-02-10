@@ -26,10 +26,17 @@ td a {
 }
 
 #page-container {
-  background-color: yellow;
   height: 100%;
   padding-top: 20px;
   // add margins
+}
+
+#page-container a {
+color: inherit;
+}
+
+#page-container a:hover {
+  text-decoration: none;
 }
 
 #main {
@@ -62,6 +69,7 @@ td a {
 #right-column {
   padding: 20px 0px 0px 5%;
   height: 100%;
+  font-size: 1.5em;
 }
 
 .navbar {
@@ -78,13 +86,5 @@ td a {
 }
 
 .half-size {
-  font-size: 0.75em;
-}
-
-.red-links a {
-  color: red;
-}
-
-.red-links a:hover {
-  color: yellow;
+  font-size: 1em;
 }
