@@ -5,10 +5,10 @@
       <% @users.each do |user| %>
         <%= tag.tr class: "row" do %>
           <div class="row">
-            <%= tag.td width: "30%" do %>
+            <%= tag.td width: "40%" do %>
               <%= link_to user.name, user_path(user) %>
             <% end %>
-            <%= tag.td width: "50%" do %>
+            <%= tag.td width: "54%" do %>
               <%= link_to user.email, user_path(user) %>
             <% end %>
           </div>
