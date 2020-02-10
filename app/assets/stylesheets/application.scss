@@ -16,7 +16,6 @@ html{
 
 body {
   width: 100%;
-  min-height: 100%;
   padding-top: 10%;
   background-color: #e6f2ff;
 }
@@ -26,9 +25,8 @@ td a {
 }
 
 #page-container {
+  background-color: yellow;
   height: 100%;
-  padding-top: 20px;
-  // add margins
 }
 
 #page-container a {
@@ -54,16 +52,15 @@ color: inherit;
 }
 
 #left-column {
-  font-size: 1.5em;
   border-right: 3px double gray;
   border-left: 3px double gray;
   padding: 20px 0px 0px 10%;
   margin-left: 10%;
+  font-size: 10px;
 }
 
-#left-column .btn:hover {
-  color: #e6f2ff;
-  background-color: black;
+#left-column .btn {
+  font-size: 2em;
 }
 
 #right-column {
@@ -78,11 +75,16 @@ color: inherit;
 }
 
 .navbar-brand {
-  font-size: 2em;
+  font-family: 'Indie Flower', cursive;
+  font-size: 3em;
 }
 
 .me-button {
   border-radius: 50%;
+}
+
+.nav-button {
+  font-size: 1.5em;
 }
 
 .half-size {
