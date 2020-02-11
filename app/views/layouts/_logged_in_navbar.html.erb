@@ -1,6 +1,6 @@
 <form class="form-inline">
-  <%= link_to "Me", user_path(current_user), class: "btn btn-outline-dark me-button nav-button" %>
-  <div style="padding: 10px;">
-    <%= link_to "Log Out", destroy_user_session_path, method: :delete, class: "btn btn-outline-dark nav-button" %>
+  <%= link_to "Me", user_path(current_user), class: "btn me-button nav-button" %>
+  <div style="padding: 20px;">
+    <%= link_to "Log Out", destroy_user_session_path, method: :delete, class: "btn nav-button" %>
   </div>
 </form>

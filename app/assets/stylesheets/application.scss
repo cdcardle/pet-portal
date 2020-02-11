@@ -40,13 +40,14 @@ td {
 }
 
 #footer {
-  background-color: darkgreen;
+  color: darkslateblue;
+  background-color: lightgray;
   position: relative;
   height: 100px;
   margin-top: -100px;
   clear: both;
-  color: white;
   text-align: right;
+  font-weight: bold;
   padding-right: 10px;
   width: 100%;
 }
@@ -70,6 +71,7 @@ td {
 }
 
 .navbar {
+  color: darkslateblue;
   background-color: lightgray;
   width: 100%;
 }
